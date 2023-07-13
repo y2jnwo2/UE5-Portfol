@@ -4,16 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "CollisionCharacter.generated.h"
+#include "WarCharacter.generated.h"
 
 UCLASS()
-class WARZHAO_API ACollisionCharacter : public ACharacter
+class WARZHAO_API AWarCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	ACollisionCharacter();
+	AWarCharacter();
 
 protected:
 	// Called when the game starts or when spawned
