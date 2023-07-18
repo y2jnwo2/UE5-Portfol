@@ -9,7 +9,7 @@
 
 class UWar_UserWidget* UWarZhaoGlobal::DebugWidget = nullptr;
 
-void UARGlobal::WarDebugTextInit()
+void WarZhaoGlobal::WarDebugTextInit()
 {
 	// 끝날을때 자동으로 지워지지만
 	// delete를 한다고 
