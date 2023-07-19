@@ -15,13 +15,13 @@ class WARZHAO_API UGlobalGameInstance : public UGameInstance
 	GENERATED_BODY()
 	
 public :
-	UGlobalGameInstance();
+	//UGlobalGameInstance();
 	~UGlobalGameInstance();
 
-	UStaticMesh* GetMesh(FName _Name);
+	//UStaticMesh* GetMesh(FName _Name);
 
 private:
-	UDataTable* MeshDatas;
+	//UDataTable* MeshDatas;
 
 	TArray<UStaticMesh*> ArrMesh;
 

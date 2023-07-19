@@ -18,8 +18,8 @@ public:
 	UFUNCTION(BlueprintCallable, category = "WarZhaoGlobal")
 	static void WarDebugTextInit();
 
-	/*UFUNCTION(BlueprintCallable, category = "WarZhaoGlobal"meta = (DefaultToSelf = "_Object")))
-	static void WarDebugTextPring(clas AActor* _Object, const FString& _Text)*/
+	UFUNCTION(BlueprintCallable, category = "WarZhaoGlobal",meta = (DefaultToSelf = "_Object"))
+	static void WarDebugTextPrint(class AActor* _Object, const FString& _Text);
 
 	static class UWar_UserWidget* DebugWidget;
 };

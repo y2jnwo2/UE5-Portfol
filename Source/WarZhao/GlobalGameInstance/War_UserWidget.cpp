@@ -3,7 +3,7 @@
 
 #include "GlobalGameInstance/War_UserWidget.h"
 
-void UGlobalDebugUserWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
+void UWar_UserWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 {
 	Super::NativeTick(MyGeometry, InDeltaTime);
 
