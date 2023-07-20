@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
 #include "CoreMinimal.h"
 
 UENUM(BlueprintType)
 enum class WarAniState : uint8
 {
-	None UMETA(DisplayName = "»ç¿ë¾ÈÇÔ"),
-	Idle UMETA(DisplayName = "¼­ÀÖ±â"),
-	LeftMove UMETA(DisplayName = "¿ŞÂÊÀÌµ¿"),
-	RightMove UMETA(DisplayName = "¿À¸¥ÂÊÀÌµ¿"),
-	ForwardMove UMETA(DisplayName = "¾ÕÀ¸·ÎÀÌµ¿"),
-	BackwardMove UMETA(DisplayName = "µÚ·ÎÀÌµ¿"),
-	Jump UMETA(DisplayName = "Á¡ÇÁ"),
-	Attack UMETA(DisplayName = "°ø°İ"),
+	None UMETA(DisplayName = "ì‚¬ìš©ì•ˆí•¨"),
+	Idle UMETA(DisplayName = "ì„œìˆê¸°"),
+	LeftMove UMETA(DisplayName = "ì™¼ìª½ì´ë™"),
+	RightMove UMETA(DisplayName = "ì˜¤ë¥¸ìª½ì´ë™"),
+	ForwardMove UMETA(DisplayName = "ì•ìœ¼ë¡œì´ë™"),
+	BackwardMove UMETA(DisplayName = "ë’¤ë¡œì´ë™"),
+	Jump UMETA(DisplayName = "ì í”„"),
+	Attack UMETA(DisplayName = "ê³µê²©"),
 };

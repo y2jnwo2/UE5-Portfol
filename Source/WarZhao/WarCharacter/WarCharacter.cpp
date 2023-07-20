@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+ï»¿// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "WarCharacter.h"
@@ -43,9 +43,9 @@ void AWarCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	{
 		bBindingsAdded = true;
 
-		// ¿©±âÀÇ ³»¿ëÀº ¹¹³Ä?
-		// DefaultPawn_MoveForward Ãß°¡µÇ´Â°Í »Ó
-		// Ãà¸ÅÇÎ¸¸ ÇÏ°í ÀÖ½º´Ï´Ù.
+		// ì—¬ê¸°ì˜ ë‚´ìš©ì€ ë­ëƒ?
+		// DefaultPawn_MoveForward ì¶”ê°€ë˜ëŠ”ê²ƒ ë¿
+		// ì¶•ë§¤í•‘ë§Œ í•˜ê³  ìˆìŠ¤ë‹ˆë‹¤.
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("PlayerMoveForward", EKeys::W, 1.f));
 		UPlayerInput::AddEngineDefinedAxisMapping(FInputAxisKeyMapping("PlayerMoveForward", EKeys::S, -1.f));
 
@@ -65,9 +65,9 @@ void AWarCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("PlayerJumpAction"), EKeys::SpaceBar));
 	}
 
-	// Å°¿Í ÇÔ¼ö¸¦ ¿¬°áÇÕ´Ï´Ù.
-	// ÀÌ Å°°¡ ´­¸®¸é ÀÌ ÇÔ¼ö¸¦ ½ÇÇà½ÃÄÑÁàÀÎµ¥.
-	// ÃàÀÏ¶§´Â ÀÏ´Ü °è¼Ó ½ÇÇà½ÃÄÑÁà.
+	// í‚¤ì™€ í•¨ìˆ˜ë¥¼ ì—°ê²°í•©ë‹ˆë‹¤.
+	// ì´ í‚¤ê°€ ëˆŒë¦¬ë©´ ì´ í•¨ìˆ˜ë¥¼ ì‹¤í–‰ì‹œì¼œì¤˜ì¸ë°.
+	// ì¶•ì¼ë•ŒëŠ” ì¼ë‹¨ ê³„ì† ì‹¤í–‰ì‹œì¼œì¤˜.
 	PlayerInputComponent->BindAxis("PlayerMoveForward", this, &AWarCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("PlayerMoveRight", this, &AWarCharacter::MoveRight);
 	PlayerInputComponent->BindAxis("PlayerTurn", this, &AWarCharacter::AddControllerYawInput);
@@ -93,7 +93,7 @@ void AWarCharacter::MoveRight(float Val)
 		{
 			FRotator const ControlSpaceRot = Controller->GetControlRotation();
 			// transform to world space and add it
-			// ÇöÀç ³» È¸ÀüÀ» °¡Á®¿Í¼­ yÃà¿¡ ÇØ´çÇÏ´Â Ãàº¤ÅÍ¸¦ ¾ò¾î¿À´Â °Ì´Ï´Ù.
+			// í˜„ì¬ ë‚´ íšŒì „ì„ ê°€ì ¸ì™€ì„œ yì¶•ì— í•´ë‹¹í•˜ëŠ” ì¶•ë²¡í„°ë¥¼ ì–»ì–´ì˜¤ëŠ” ê²ë‹ˆë‹¤.
 			AddMovementInput(FRotationMatrix(ControlSpaceRot).GetScaledAxis(EAxis::Y), Val);
 
 			AniState = Val > 0.f ? WarAniState::RightMove : WarAniState::LeftMove;
@@ -120,15 +120,15 @@ void AWarCharacter::MoveForward(float Val)
 	{
 		if (Controller)
 		{
-			// ÄÁÆ®·Ñ·¯´Â ±âº»ÀûÀ¸·Î
-			// charcter ÇÏ³ª¾¿ ºÙ¾î ÀÖ½À´Ï´Ù.
+			// ì»¨íŠ¸ë¡¤ëŸ¬ëŠ” ê¸°ë³¸ì ìœ¼ë¡œ
+			// charcter í•˜ë‚˜ì”© ë¶™ì–´ ìˆìŠµë‹ˆë‹¤.
 			FRotator const ControlSpaceRot = Controller->GetControlRotation();
 
-			// ÀÌ°Ç ¹æÇâÀÏ »ÓÀÔ´Ï´Ù.
+			// ì´ê±´ ë°©í–¥ì¼ ë¿ì…ë‹ˆë‹¤.
 			// transform to world space and add it
 			AddMovementInput(FRotationMatrix(ControlSpaceRot).GetScaledAxis(EAxis::X), Val);
-			// Å¾ºä°ÔÀÓÀÌ¸é ´Ù¸£°Ô ³ª¿À°Ô µÇ´Âµ¥.
-			// Áö±İÀº TPS¸¦ ÇÏ°í ÀÖ±â ¶§¹®¿¡ ÄÁÆ®·Ñ·¯ÀÇ È¸ÀüÀÌ³ª ¾×ÅÍÀÇ È¸ÀüÀÌ³ª °°¾Æ¿ä.
+			// íƒ‘ë·°ê²Œì„ì´ë©´ ë‹¤ë¥´ê²Œ ë‚˜ì˜¤ê²Œ ë˜ëŠ”ë°.
+			// ì§€ê¸ˆì€ TPSë¥¼ í•˜ê³  ìˆê¸° ë•Œë¬¸ì— ì»¨íŠ¸ë¡¤ëŸ¬ì˜ íšŒì „ì´ë‚˜ ì•¡í„°ì˜ íšŒì „ì´ë‚˜ ê°™ì•„ìš”.
 			// AddMovementInput(GetActorForwardVector(), Val);
 
 			AniState = Val > 0.f ? WarAniState::ForwardMove : WarAniState::BackwardMove;
@@ -143,7 +143,7 @@ void AWarCharacter::MoveForward(float Val)
 		}
 	}
 
-	// ÀÌ·± ´À³¦ÀÇ ÇÔ¼ö Áï staticÇÔ¼ö¸¦ ÀÇ¹ÌÇÑ´Ù.
+	// ì´ëŸ° ëŠë‚Œì˜ í•¨ìˆ˜ ì¦‰ staticí•¨ìˆ˜ë¥¼ ì˜ë¯¸í•œë‹¤.
 	// AEGLOBAL::DebugPrint("AAAAAAA");
 }
 
@@ -188,7 +188,7 @@ void AWarCharacter::JumpAction()
 
 void AWarCharacter::AttackAction()
 {
-	// ¹«ºê¸ÕÆ® ÄÄÆ÷³ÍÆ®¸¦ ÅëÇØ¼­ ÇÑ´Ù.
+	// ë¬´ë¸Œë¨¼íŠ¸ ì»´í¬ë„ŒíŠ¸ë¥¼ í†µí•´ì„œ í•œë‹¤.
 	// GetMovementComponent()
 
 	// PlayMontage();
