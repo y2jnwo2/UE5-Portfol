@@ -12,8 +12,8 @@ AWarCharacter::AWarCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	/*BaseTurnRate = 45.f;
-	BaseLookUpRate = 45.f;*/
+	BaseTurnRate = 45.f;
+	BaseLookUpRate = 45.f;
 
 	JumpMaxHoldTime = 0.0f;
 
@@ -198,7 +198,7 @@ void AWarCharacter::AttackAction()
 
 void AWarCharacter::AnimationTick()
 {
-	class UAnimMontage* Montage = AllAnimations[AniState];
+	/*class UAnimMontage* Montage = AllAnimations[AniState];
 
 	if (nullptr == Montage)
 	{
@@ -208,6 +208,6 @@ void AWarCharacter::AnimationTick()
 	if (false == GetMesh()->GetAnimInstance()->Montage_IsPlaying(Montage))
 	{
 		GetMesh()->GetAnimInstance()->Montage_Play(Montage, 1.0f);
-	}
+	}*/
 }
 
