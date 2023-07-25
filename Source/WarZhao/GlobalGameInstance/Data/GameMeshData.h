@@ -17,5 +17,6 @@ struct WARZHAO_API FGameMeshData : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 	class UStaticMesh* Mesh;
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+	class USkeletalMesh* SKMesh;
 };

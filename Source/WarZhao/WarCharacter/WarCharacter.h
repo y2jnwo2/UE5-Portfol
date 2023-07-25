@@ -51,7 +51,7 @@ public:
 		TMap<WarAniState, class UAnimMontage*> AllAnimations;
 
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite)
-		UStaticMeshComponent* WeaponMesh;
+		USkeletalMeshComponent* WeaponMesh;
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite)
-		TArray<UStaticMesh*> WeaponArrays;
+		TArray<USkeletalMesh*> WeaponArrays;
 };

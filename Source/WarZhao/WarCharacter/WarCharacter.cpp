@@ -23,7 +23,24 @@ AWarCharacter::AWarCharacter()
 void AWarCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	JumpMaxCount = 2;
+
+	GetWorld()->GetAuthGameMode();
+
+	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
+
+	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetSKMesh(TEXT("Weapon")));
+
+	//WeaponMesh->SetSkeletalMesh(WeaponArrays[0]);
+
+	TArray<UActorComponent*> FindComponents = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("RotComponent"));
+
+	if (0 != FindComponents.Num())
+	{
+		USceneComponent* SceneCom = Cast<USceneComponent>(FindComponents[0]);
+
+		UStaticMeshComponent* StaticMesh = Cast<UStaticMeshComponent>(FindComponents[0]);
+	}
 }
 
 // Called every frame
@@ -31,6 +48,14 @@ void AWarCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (AniState != WarAniState::Attack)
+	{
+		WeaponMesh->SetGenerateOverlapEvents(false);
+	}
+	else
+	{
+		WeaponMesh->SetGenerateOverlapEvents(true);
+	}
 }
 
 // Called to bind functionality to input

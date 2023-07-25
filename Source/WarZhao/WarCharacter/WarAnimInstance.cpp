@@ -16,6 +16,8 @@ void UWarAnimInstance::NativeBeginPlay()
 	{
 		return;
 	}
+
+	AllAnimations = Character->AllAnimations;
 }
 
 void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
