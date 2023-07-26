@@ -32,22 +32,22 @@ UGlobalGameInstance::~UGlobalGameInstance()
 
 }
 
-UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
-{
-	if (nullptr == MeshDatas)
-	{
-		return nullptr;
-	}
-
-	FGameMeshData* FindTable = MeshDatas->FindRow<FGameMeshData>(_Name, _Name.ToString());
-
-	if (nullptr == FindTable)
-	{
-		return nullptr;
-	}
-
-	return FindTable->Mesh;
-}
+//UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
+//{
+//	if (nullptr == MeshDatas)
+//	{
+//		return nullptr;
+//	}
+//
+//	FGameMeshData* FindTable = MeshDatas->FindRow<FGameMeshData>(_Name, _Name.ToString());
+//
+//	if (nullptr == FindTable)
+//	{
+//		return nullptr;
+//	}
+//
+//	return FindTable->Mesh;
+//}
 
 // ME Make
 USkeletalMesh* UGlobalGameInstance::GetSKMesh(FName _Name)

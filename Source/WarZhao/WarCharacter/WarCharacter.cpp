@@ -17,6 +17,9 @@ AWarCharacter::AWarCharacter()
 
 	JumpMaxHoldTime = 0.0f;
 
+	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
+
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r"));
 }
 
 // Called when the game starts or when spawned
@@ -30,8 +33,9 @@ void AWarCharacter::BeginPlay()
 	UGlobalGameInstance* Inst = GetGameInstance<UGlobalGameInstance>();
 
 	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetSKMesh(TEXT("Weapon")));
+	WeaponArrays.Add(GetGameInstance<UGlobalGameInstance>()->GetSKMesh(TEXT("Cube")));
 
-	//WeaponMesh->SetSkeletalMesh(WeaponArrays[0]);
+	WeaponMesh->SetSkeletalMesh(WeaponArrays[0]);
 
 	TArray<UActorComponent*> FindComponents = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("RotComponent"));
 
