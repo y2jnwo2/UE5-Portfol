@@ -19,7 +19,7 @@ AWarCharacter::AWarCharacter()
 
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 
-	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r"));
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r소켓"));
 }
 
 // Called when the game starts or when spawned
