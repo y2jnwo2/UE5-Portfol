@@ -5,6 +5,7 @@
 #include "GlobalGameInstance/GlobalGameInstance.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AWarCharacter::AWarCharacter()
@@ -20,7 +21,14 @@ AWarCharacter::AWarCharacter()
 	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
 
 	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r소켓"));
+
+	// 디버그 공격거리
+	AttackRange = 200.0f;
+	AttackRadius = 50.0f;
+
 }
+
+
 
 // Called when the game starts or when spawned
 void AWarCharacter::BeginPlay()
@@ -60,6 +68,8 @@ void AWarCharacter::Tick(float DeltaTime)
 	{
 		WeaponMesh->SetGenerateOverlapEvents(true);
 	}
+	// .임시
+	// ABAnim->OnAttackHitCheck.AddUObject(this, &AAbCHaracter::AttacCheck);
 }
 
 // Called to bind functionality to input
@@ -238,5 +248,38 @@ void AWarCharacter::AnimationTick()
 	{
 		GetMesh()->GetAnimInstance()->Montage_Play(Montage, 1.0f);
 	}*/
+}
+
+// 디버그 공격거리
+void AWarCharacter::AttackCheck()
+{
+	FHitResult HitResult;
+	FCollisionQueryParams Params(NAME_None, false, this);
+	bool bResult = GetWorld()->SweepSingleByChannel(
+		HitResult, GetActorLocation(),
+		GetActorLocation() + GetActorForwardVector() * AttackRange,
+		FQuat::Identity, ECollisionChannel::ECC_EngineTraceChannel2,
+		FCollisionShape::MakeSphere(AttackRadius), Params);
+	
+#if ENABLE_DRAW_DEBUG
+
+	FVector TraceVec = GetActorForwardVector() * AttackRange;
+	FVector Center = GetActorLocation() + TraceVec * 0.5f;
+	float HalfHeight = AttackRange * 0.5f + AttackRadius;
+	FQuat CapsuleRot = FRotationMatrix::MakeFromZ(TraceVec).ToQuat();
+	FColor DrawColor = bResult ? FColor::Green : FColor::Red;
+	float DebugLifeTime = 5.0f;
+
+	DrawDebugCapsule(GetWorld(), Center, HalfHeight, AttackRadius, CapsuleRot, DrawColor, false, DebugLifeTime);
+
+#endif
+
+	if (bResult)
+	{
+		if (HitResult.GetActor()->IsValidLowLevel())
+		{
+			UE_LOG(LogTemp, Log, TEXT("%S(%u)> %d"), __FUNCTION__, __LINE__, *HitResult.GetActor()->GetName());
+		}
+	}
 }
 

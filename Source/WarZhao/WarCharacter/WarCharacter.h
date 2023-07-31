@@ -54,4 +54,14 @@ public:
 		USkeletalMeshComponent* WeaponMesh;
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite)
 		TArray<USkeletalMesh*> WeaponArrays;
+
+	// 디버그 공격거리
+	UPROPERTY(VisibleInstanceOnly, BluePrintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		float AttackRange;
+
+	UPROPERTY(VisibleInstanceOnly, BluePrintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
+		float AttackRadius;
+
+private:
+	void AttackCheck();
 };
