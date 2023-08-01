@@ -2,6 +2,7 @@
 
 
 #include "GlobalGameInstance/GlobalCharacter.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AGlobalCharacter::AGlobalCharacter()
@@ -16,6 +17,11 @@ void AGlobalCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	GlobalAnimInstance = Cast<UGlobalAnimInstance>(GetMesh()->GetAnimInstance());
+
+	//GlobalAnimInstance->AllAnimations = AllAnimations;
+
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AGlobalCharacter::OverLap);
 }
 
 // Called every frame
@@ -32,3 +38,14 @@ void AGlobalCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 
 }
 
+void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
+	AActor* OtherActor,
+	UPrimitiveComponent* OtherComp,
+	int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (true == OtherComp->ComponentHasTag(TEXT("Damage")))
+	{
+		HP -= 1;
+	}
+}
