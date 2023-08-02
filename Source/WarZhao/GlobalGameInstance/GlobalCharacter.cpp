@@ -17,11 +17,11 @@ void AGlobalCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	GlobalAnimInstance = Cast<UGlobalAnimInstance>(GetMesh()->GetAnimInstance());
+	/*GlobalAnimInstance = Cast<UGlobalAnimInstance>(GetMesh()->GetAnimInstance());
 
-	//GlobalAnimInstance->AllAnimations = AllAnimations;
+	GlobalAnimInstance->AllAnimations = AllAnimations;
 
-	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AGlobalCharacter::OverLap);
+	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AGlobalCharacter::OverLap);*/
 }
 
 // Called every frame

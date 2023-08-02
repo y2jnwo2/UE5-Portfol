@@ -20,9 +20,9 @@ public :
 		int AniState = 0;
 		int DefaultAniState = -1;
 
-	TMap<int, class UANimMontage*> AllAnimations;
+	TMap<int, class UAnimMontage*> AllAnimations;
 
-	class UAnimMontage* CuyrMontage = nullptr;
+	class UAnimMontage* CurMontage = nullptr;
 
 	UFUNCTION()
 		void MontageEnd(UAnimMontage* ANim, bool _Inte);
