@@ -62,6 +62,7 @@ public:
 	UPROPERTY(VisibleInstanceOnly, BluePrintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))
 		float AttackRadius;
 
+	
 private:
 	void AttackCheck();
 };

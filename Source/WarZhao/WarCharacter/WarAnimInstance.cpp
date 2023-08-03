@@ -3,6 +3,7 @@
 
 #include "WarAnimInstance.h"
 #include "WarCharacter.h"
+#include "Animation/AnimMontage.h"
 
 void UWarAnimInstance::NativeBeginPlay()
 {
@@ -18,6 +19,11 @@ void UWarAnimInstance::NativeBeginPlay()
 	}
 
 	AllAnimations = Character->AllAnimations;
+
+	// 처음엔 공격중이 아니니 false로 시작
+	bIsAttacking = false;
+
+	ComboIndex = 0;
 }
 
 void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
@@ -75,4 +81,32 @@ void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
 		Character->AniState = AniState;
 		Montage_Play(AllAnimations[WarAniState::Idle], 1.0f);
 	}
+
+	
+}
+
+// 콤보공격 구현
+void UWarAnimInstance::OnAttack()
+{
+	if (bIsAttacking == false)
+	{
+		StartAttack();
+		bIsAttacking = true;
+	}
+}
+
+void UWarAnimInstance::StartAttack()
+{
+	/*UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
+	
+	if (!AnimInstance || !AttackMontage)
+	{
+		return;
+	}
+
+	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+	}*/
+	
 }

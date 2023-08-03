@@ -10,6 +10,7 @@
 // Sets default values
 AWarCharacter::AWarCharacter()
 {
+	
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
@@ -59,7 +60,7 @@ void AWarCharacter::BeginPlay()
 void AWarCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 	if (AniState != WarAniState::Attack)
 	{
 		WeaponMesh->SetGenerateOverlapEvents(false);
@@ -233,6 +234,7 @@ void AWarCharacter::AttackAction()
 	// PlayMontage();
 
 	AniState = WarAniState::Attack;
+
 }
 
 void AWarCharacter::AnimationTick()
@@ -248,6 +250,7 @@ void AWarCharacter::AnimationTick()
 	{
 		GetMesh()->GetAnimInstance()->Montage_Play(Montage, 1.0f);
 	}*/
+	
 }
 
 // 디버그 공격거리
