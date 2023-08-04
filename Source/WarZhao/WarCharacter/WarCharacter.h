@@ -51,9 +51,10 @@ public:
 		TMap<WarAniState, class UAnimMontage*> AllAnimations;
 
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite)
-		USkeletalMeshComponent* WeaponMesh;
+		UStaticMeshComponent* WeaponMesh;
+
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite)
-		TArray<USkeletalMesh*> WeaponArrays;
+		TArray<UStaticMesh*> WeaponArrays;
 
 	// 디버그 공격거리
 	UPROPERTY(VisibleInstanceOnly, BluePrintReadOnly, Category = Attack, Meta = (AllowPrivateAccess = true))

@@ -14,4 +14,24 @@ class WARZHAO_API UMainWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	void SetStatusWindowOnOffSwitch()
+	{
+		StatusWindowOnOff = StatusWindowOnOff == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden;
+	}
+
+	void SetInventoryOnOffSwitch()
+	{
+		InventoryOnOff = InventoryOnOff == ESlateVisibility::Hidden ? ESlateVisibility::Visible : ESlateVisibility::Hidden;
+	}
+
+private:
+	UPROPERTY(Category = "Effect", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		ESlateVisibility InventoryOnOff = ESlateVisibility::Hidden;
+
+	UPROPERTY(Category = "Effect", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		ESlateVisibility StatusWindowOnOff = ESlateVisibility::Hidden;
+
+	UPROPERTY(Category = "Effect", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		ESlateVisibility TalkTextWindowOnOff = ESlateVisibility::Hidden;
 };

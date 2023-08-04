@@ -55,6 +55,7 @@ void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 	{
 		Montage_Play(Montage, 1.0f);
 	}
+
 }
 
 void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
@@ -62,7 +63,7 @@ void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
 	TSubclassOf<UAnimInstance> Inst = UWarAnimInstance::StaticClass();
 
 	AWarCharacter* Character = Cast<AWarCharacter>(GetOwningActor());
-
+	
 	if (nullptr == Character && false == Character->IsValidLowLevel())
 	{
 		return;
@@ -97,6 +98,14 @@ void UWarAnimInstance::OnAttack()
 
 void UWarAnimInstance::StartAttack()
 {
+	/*AWarCharacter* WarActor = Cast<AWarCharacter>();
+
+	if (null == WarActor)
+	{
+		return;
+	}
+	UWarAnimInstance* AnimInstance = WarActor->GetMesh()->GetAnimInstance();*/
+
 	/*UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
 	
 	if (!AnimInstance || !AttackMontage)

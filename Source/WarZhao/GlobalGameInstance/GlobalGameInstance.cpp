@@ -3,6 +3,7 @@
 
 #include "GlobalGameInstance.h"
 #include "Data/GameMeshData.h"
+#include <GlobalGameInstance/WarZhaoGlobal.h>
 
 UGlobalGameInstance::UGlobalGameInstance()
 {
@@ -32,25 +33,7 @@ UGlobalGameInstance::~UGlobalGameInstance()
 
 }
 
-//UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
-//{
-//	if (nullptr == MeshDatas)
-//	{
-//		return nullptr;
-//	}
-//
-//	FGameMeshData* FindTable = MeshDatas->FindRow<FGameMeshData>(_Name, _Name.ToString());
-//
-//	if (nullptr == FindTable)
-//	{
-//		return nullptr;
-//	}
-//
-//	return FindTable->Mesh;
-//}
-
-// ME Make
-USkeletalMesh* UGlobalGameInstance::GetSKMesh(FName _Name)
+UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
 {
 	if (nullptr == MeshDatas)
 	{
@@ -64,6 +47,7 @@ USkeletalMesh* UGlobalGameInstance::GetSKMesh(FName _Name)
 		return nullptr;
 	}
 
-	return FindTable->SKMesh;
+	return FindTable->Mesh;
 }
 
+	

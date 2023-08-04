@@ -14,18 +14,34 @@ UCLASS()
 class WARZHAO_API UGlobalGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-	
+		/// Script / Engine.StaticMesh'/Game/Resources/InfinityBladeWeapons/Weapons/Blade/Swords/Blade_BlackKnight/Weapon_BlackSword.Weapon_BlackSword'
 public :
 	UGlobalGameInstance();
 	~UGlobalGameInstance();
 
+	TSubclassOf<UObject> GetSubClass(FName _Name);
+
 	UStaticMesh* GetMesh(FName _Name);
-	USkeletalMesh* GetSKMesh(FName _Name);
+
+	struct FMonsterData* GetMonsterData(FName _Name);
+
+	const struct FItemData* GetRandomItemData();
+
 private:
 	UPROPERTY()
 	UDataTable* MeshDatas;
 
 	UPROPERTY()
+		UDataTable* SubClassData;
+
+	UPROPERTY()
+		UDataTable* ItemDatas;
+
+	TArray<const struct FItemData*> ItemDataRandoms;
+
+	UPROPERTY()
+		UDataTable* MonsterDatas;
+
 	TArray<UStaticMesh*> ArrMesh;
 
 	
