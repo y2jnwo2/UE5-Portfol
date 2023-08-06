@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
+#include "WarAnimInstance.h"
 
 // Sets default values
 AWarCharacter::AWarCharacter()
@@ -27,6 +28,10 @@ AWarCharacter::AWarCharacter()
 	AttackRange = 200.0f;
 	AttackRadius = 50.0f;
 
+	// 처음엔 공격중이 아니니 false로 시작
+	bIsAttacking = false;
+
+	ComboIndex = 0;
 }
 
 
@@ -118,6 +123,8 @@ void AWarCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 
 	PlayerInputComponent->BindAction("PlayerAttack", EInputEvent::IE_Pressed, this, &AWarCharacter::AttackAction);
 	PlayerInputComponent->BindAction("PlayerJumpAction", EInputEvent::IE_Pressed, this, &AWarCharacter::JumpAction);
+
+	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AWarCharacter::OnAttack);
 }
 
 void AWarCharacter::MoveRight(float Val)
@@ -284,5 +291,33 @@ void AWarCharacter::AttackCheck()
 			UE_LOG(LogTemp, Log, TEXT("%S(%u)> %d"), __FUNCTION__, __LINE__, *HitResult.GetActor()->GetName());
 		}
 	}
+}
+
+// 콤보공격 구현
+void AWarCharacter::OnAttack()
+{
+	if (bIsAttacking == false)
+	{
+		StartAttack();
+		bIsAttacking = true;
+	}
+}
+
+void AWarCharacter::StartAttack()
+{
+	
+
+	UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
+	
+	if (!AnimInstance || !AttackMontage)
+	{
+		return;
+	}
+
+	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+	}
+
 }
 

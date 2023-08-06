@@ -20,10 +20,7 @@ void UWarAnimInstance::NativeBeginPlay()
 
 	AllAnimations = Character->AllAnimations;
 
-	// 처음엔 공격중이 아니니 false로 시작
-	bIsAttacking = false;
-
-	ComboIndex = 0;
+	
 }
 
 void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
@@ -86,36 +83,16 @@ void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
 	
 }
 
-// 콤보공격 구현
-void UWarAnimInstance::OnAttack()
+void UWarAnimInstance::AnimNotify_AttackEnd()
 {
-	if (bIsAttacking == false)
+	AWarCharacter* PlayerAvatar = Cast<AWarCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	if (PlayerAvatar)
 	{
-		StartAttack();
-		bIsAttacking = true;
+		PlayerAvatar->bIsAttacking = false;
 	}
 }
 
-void UWarAnimInstance::StartAttack()
-{
-	/*AWarCharacter* WarActor = Cast<AWarCharacter>();
 
-	if (null == WarActor)
-	{
-		return;
-	}
-	UWarAnimInstance* AnimInstance = WarActor->GetMesh()->GetAnimInstance();*/
 
-	/*UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
-	
-	if (!AnimInstance || !AttackMontage)
-	{
-		return;
-	}
 
-	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
-	{
-		AnimInstance->Montage_Play(AttackMontage);
-	}*/
-	
-}

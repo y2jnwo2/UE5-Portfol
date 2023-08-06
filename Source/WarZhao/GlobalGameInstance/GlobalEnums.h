@@ -16,3 +16,13 @@ enum class AIState : uint8
 	Jump UMETA(DisplayName = "점프"),
 	Attack UMETA(DisplayName = "공격"),
 };
+
+UENUM(BlueprintType)
+enum class ItemType : uint8
+{
+	NONE UMETA(DisplayName = "내용없음"),
+	ARMOR UMETA(DisplayName = "갑옷"),
+	WEAPON UMETA(DisplayName = "무기"),
+	POSTION UMETA(DisplayName = "포션"),
+	QUEST UMETA(DisplayName = "퀘스트"),
+};

@@ -6,6 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "EnumsAll.h"
 #include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 #include "WarAnimInstance.generated.h"
 
 /**
@@ -25,19 +26,10 @@ public :
 	UFUNCTION()
 		void MontageEnd(UAnimMontage* Anim, bool _Inter);
 
-	// ÄÞº¸ °ø°Ý 
+	// ÄÞº¸ ¾îÅÃ ±¸Çö
 	UFUNCTION()
-		void OnAttack();
+	void AnimNotify_AttackEnd();
 
-	UFUNCTION()
-		void StartAttack();
-
-	UPROPERTY(Category = "Anim", EditAnyWhere, BlueprintReadWrite)
-		class UAnimMontage* AttackMontage;
-
-	bool bIsAttacking;
-	TArray<FString> ComboSections = { TEXT("Combo0"), TEXT("Combo1"), TEXT("Combo2"), TEXT("Combo3") };
-	int32 ComboIndex;
 
 protected:
 	void NativeBeginPlay() override;
