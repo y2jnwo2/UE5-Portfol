@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "DrawDebugHelpers.h"
 #include "WarAnimInstance.h"
+#include "Animation/AnimMontage.h"
 
 // Sets default values
 AWarCharacter::AWarCharacter()
@@ -32,6 +33,8 @@ AWarCharacter::AWarCharacter()
 	bIsAttacking = false;
 
 	ComboIndex = 0;
+
+	bCanComboAttack = false;
 }
 
 
@@ -124,7 +127,7 @@ void AWarCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	PlayerInputComponent->BindAction("PlayerAttack", EInputEvent::IE_Pressed, this, &AWarCharacter::AttackAction);
 	PlayerInputComponent->BindAction("PlayerJumpAction", EInputEvent::IE_Pressed, this, &AWarCharacter::JumpAction);
 
-	PlayerInputComponent->BindAction("Attack", EInputEvent::IE_Pressed, this, &AWarCharacter::OnAttack);
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AWarCharacter::OnAttack);
 }
 
 void AWarCharacter::MoveRight(float Val)
@@ -301,6 +304,11 @@ void AWarCharacter::OnAttack()
 		StartAttack();
 		bIsAttacking = true;
 	}
+
+	else if (bIsAttacking == true)
+	{
+		bCanComboAttack = true;
+	}
 }
 
 void AWarCharacter::StartAttack()
@@ -317,6 +325,13 @@ void AWarCharacter::StartAttack()
 	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
 	{
 		AnimInstance->Montage_Play(AttackMontage);
+	}
+
+	else if (AnimInstance->Montage_IsPlaying(AttackMontage))
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+
+		AnimInstance->Montage_JumpToSection(FName(ComboSections[ComboIndex]), AttackMontage);
 	}
 
 }

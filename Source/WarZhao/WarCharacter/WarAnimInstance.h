@@ -6,6 +6,7 @@
 #include "Animation/AnimInstance.h"
 #include "EnumsAll.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "WarAnimInstance.generated.h"
 
@@ -30,6 +31,11 @@ public :
 	UFUNCTION()
 	void AnimNotify_AttackEnd();
 
+	UFUNCTION()
+		void AnimNotify_CheckComboAttack();
+
+	UFUNCTION()
+		void AnimNotify_InitComboAttack();
 
 protected:
 	void NativeBeginPlay() override;

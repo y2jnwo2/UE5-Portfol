@@ -78,7 +78,7 @@ public:
 	{
 		for (TPair<EnumType, UAnimMontage*> Pair : _MapAnimation)
 		{
-			AllAnimations.Add(static_cast<int>(Pair.key), Pair.Value);
+			AllAnimations.Add(static_cast<int>(Pair.Key), Pair.Value);
 		}
 	}
 protected:
