@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AI/BT_Task_AIBase.h"
+//#include "BehaviorTree/Tasks/BT_Task_BlackboardBase.h"
 #include "BT_Task_Attack.generated.h"
 
 /**
@@ -13,5 +14,10 @@ UCLASS()
 class WARZHAO_API UBT_Task_Attack : public UBT_Task_AIBase
 {
 	GENERATED_BODY()
-	
+		UBT_Task_Attack();
+
+protected:
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) override;
+
+	void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DelataSeconds);
 };

@@ -49,10 +49,11 @@ void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 		return;
 	}
 
-	/*if (false == Montage_IsPlaying(Montage))
+	if (false == Montage_IsPlaying(Montage))
 	{
+		if (Character->bIsAttacking == false)
 		Montage_Play(Montage, 1.0f);
-	}*/
+	}
 
 }
 
@@ -86,11 +87,9 @@ void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
 void UWarAnimInstance::AnimNotify_AttackEnd()
 {
 	AWarCharacter* PlayerAvatar = Cast<AWarCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	UE_LOG(LogTemp, Log, TEXT("StartAttack1"));
 	if (PlayerAvatar)
 	{
 		PlayerAvatar->bIsAttacking = false;
-		UE_LOG(LogTemp, Log, TEXT("StartAttack2"));
 	}
 }
 
@@ -114,11 +113,11 @@ void UWarAnimInstance::AnimNotify_CheckComboAttack()
 		PlayerAvatar->ComboIndex = 0;
 	}
 
-	if (GEngine)
+	/*if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::MakeRandomColor(),
-			FString::Printf(TEXT("ComboIndex : &d"), PlayerAvatar->ComboIndex));
-	}
+			FString::Printf(TEXT("ComboIndex : %d"), PlayerAvatar->ComboIndex));
+	}*/
 }
 
 void UWarAnimInstance::AnimNotify_InitComboAttack()

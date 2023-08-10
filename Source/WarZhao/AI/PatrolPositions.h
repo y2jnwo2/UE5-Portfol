@@ -13,5 +13,7 @@ UCLASS()
 class WARZHAO_API UPatrolPositions : public UObject
 {
 	GENERATED_BODY()
-	
+public:
+	int CurrentIndex = 0;
+	TArray<FVector> Positions;
 };

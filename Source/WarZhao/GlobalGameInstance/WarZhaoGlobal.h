@@ -15,6 +15,8 @@ class WARZHAO_API UWarZhaoGlobal : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 	
 public:
+	static FRandomStream MainRandom;
+
 	UFUNCTION(BlueprintCallable, category = "WarZhaoGlobal")
 	static void WarDebugTextInit();
 

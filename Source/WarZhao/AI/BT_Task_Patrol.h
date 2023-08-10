@@ -13,5 +13,15 @@ UCLASS()
 class WARZHAO_API UBT_Task_Patrol : public UBT_Task_AIBase
 {
 	GENERATED_BODY()
-	
+
+		UBT_Task_Patrol();
+protected:
+
+	//UPROPERTY()
+	//UPatrolPositions* PP;
+
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
+
+	void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DelataSeconds);
 };
+

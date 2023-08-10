@@ -19,6 +19,10 @@ void AGlobalCharacter::BeginPlay()
 	
 	GlobalAnimInstance = Cast<UGlobalAnimInstance>(GetMesh()->GetAnimInstance());
 
+	if (nullptr == GlobalAnimInstance)
+	{
+		return; 
+	}
 	GlobalAnimInstance->AllAnimations = AllAnimations;
 
 	GetCapsuleComponent()->OnComponentBeginOverlap.AddDynamic(this, &AGlobalCharacter::OverLap);

@@ -8,6 +8,7 @@
 #include "War_UserWidget.h"
 
 class UWar_UserWidget* UWarZhaoGlobal::DebugWidget = nullptr;
+FRandomStream UWarZhaoGlobal::MainRandom;
 
 void UWarZhaoGlobal::WarDebugTextInit()
 {

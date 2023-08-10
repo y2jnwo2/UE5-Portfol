@@ -13,5 +13,11 @@ UCLASS()
 class WARZHAO_API UBT_Task_Move : public UBT_Task_AIBase
 {
 	GENERATED_BODY()
-	
+
+		UBT_Task_Move();
+
+protected:
+	EBTNodeResult::Type ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory);
+	void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DelataSeconds);
 };
+
