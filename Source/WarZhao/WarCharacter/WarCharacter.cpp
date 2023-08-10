@@ -244,7 +244,6 @@ void AWarCharacter::AttackAction()
 	// PlayMontage();
 
 	AniState = WarAniState::Attack;
-	
 }
 
 void AWarCharacter::AnimationTick()
@@ -324,6 +323,7 @@ void AWarCharacter::StartAttack()
 
 	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
 	{
+		
 		AnimInstance->Montage_Play(AttackMontage);
 	}
 

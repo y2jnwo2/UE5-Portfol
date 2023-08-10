@@ -49,10 +49,10 @@ void UWarAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 		return;
 	}
 
-	if (false == Montage_IsPlaying(Montage))
+	/*if (false == Montage_IsPlaying(Montage))
 	{
 		Montage_Play(Montage, 1.0f);
-	}
+	}*/
 
 }
 
@@ -80,17 +80,17 @@ void UWarAnimInstance::MontageEnd(UAnimMontage* Anim, bool _Inter)
 		Character->AniState = AniState;
 		Montage_Play(AllAnimations[WarAniState::Idle], 1.0f);
 	}
-
 	
 }
 
 void UWarAnimInstance::AnimNotify_AttackEnd()
 {
 	AWarCharacter* PlayerAvatar = Cast<AWarCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-
+	UE_LOG(LogTemp, Log, TEXT("StartAttack1"));
 	if (PlayerAvatar)
 	{
 		PlayerAvatar->bIsAttacking = false;
+		UE_LOG(LogTemp, Log, TEXT("StartAttack2"));
 	}
 }
 

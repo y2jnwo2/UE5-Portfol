@@ -32,10 +32,10 @@ public :
 	void AnimNotify_AttackEnd();
 
 	UFUNCTION()
-		void AnimNotify_CheckComboAttack();
+	void AnimNotify_CheckComboAttack();
 
 	UFUNCTION()
-		void AnimNotify_InitComboAttack();
+	void AnimNotify_InitComboAttack();
 
 protected:
 	void NativeBeginPlay() override;
