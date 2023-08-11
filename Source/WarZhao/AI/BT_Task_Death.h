@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AI/BT_Task_AIBase.h"
+#include "BehaviorTree/Tasks/BTTask_BlackboardBase.h"
 #include "BT_Task_Death.generated.h"
 
 /**
