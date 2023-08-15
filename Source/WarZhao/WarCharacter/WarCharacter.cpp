@@ -23,8 +23,7 @@ AWarCharacter::AWarCharacter()
 
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 
-	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r소켓"));
-
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r"));
 	// 디버그 공격거리
 	AttackRange = 200.0f;
 	AttackRadius = 50.0f;
@@ -325,6 +324,7 @@ void AWarCharacter::StartAttack()
 	{
 		
 		AnimInstance->Montage_Play(AttackMontage);
+		AniState = WarAniState::Attack;
 	}
 
 	else if (AnimInstance->Montage_IsPlaying(AttackMontage))
