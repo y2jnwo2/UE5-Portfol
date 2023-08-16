@@ -23,7 +23,11 @@ AWarCharacter::AWarCharacter()
 
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 
-	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r"));
+	WeaponMesh->SetupAttachment(GetMesh(), TEXT("weapon_r소켓"));
+
+	
+
+	
 	// 디버그 공격거리
 	AttackRange = 200.0f;
 	AttackRadius = 50.0f;
@@ -69,6 +73,10 @@ void AWarCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	if (AniState != WarAniState::Attack)
+	{
+		WeaponMesh->SetGenerateOverlapEvents(false);
+	}
+	if (bIsAttacking == false && AniState != WarAniState::Attack)
 	{
 		WeaponMesh->SetGenerateOverlapEvents(false);
 	}
@@ -324,13 +332,12 @@ void AWarCharacter::StartAttack()
 	{
 		
 		AnimInstance->Montage_Play(AttackMontage);
-		AniState = WarAniState::Attack;
+		
 	}
 
 	else if (AnimInstance->Montage_IsPlaying(AttackMontage))
 	{
 		AnimInstance->Montage_Play(AttackMontage);
-
 		AnimInstance->Montage_JumpToSection(FName(ComboSections[ComboIndex]), AttackMontage);
 	}
 
