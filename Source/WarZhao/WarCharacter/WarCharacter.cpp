@@ -46,7 +46,7 @@ AWarCharacter::AWarCharacter()
 void AWarCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	JumpMaxCount = 2;
+	JumpMaxCount = 1;
 
 	GetWorld()->GetAuthGameMode();
 
