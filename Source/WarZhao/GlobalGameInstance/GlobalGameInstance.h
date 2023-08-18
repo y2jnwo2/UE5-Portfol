@@ -14,7 +14,7 @@ UCLASS()
 class WARZHAO_API UGlobalGameInstance : public UGameInstance
 {
 	GENERATED_BODY()
-		/// Script / Engine.StaticMesh'/Game/Resources/InfinityBladeWeapons/Weapons/Blade/Swords/Blade_BlackKnight/Weapon_BlackSword.Weapon_BlackSword'
+		
 public :
 	UGlobalGameInstance();
 	~UGlobalGameInstance();

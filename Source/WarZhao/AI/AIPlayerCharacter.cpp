@@ -7,7 +7,9 @@
 #include <UIEX/GameHUD.h>
 #include <UIEX/MainWidget.h>
 #include "Camera/CameraComponent.h"
+#include <GlobalGameInstance/Data/ItemData.h>
 #include <GlobalGameInstance/ProjectTile.h>
+//#include <GlobalGameInstance/W>
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "AIEnum.h"
@@ -212,49 +214,49 @@ void AAIPlayerCharacter::MontageEnd(UAnimMontage* Anim, bool _Inter)
 
 void AAIPlayerCharacter::AnimNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
-	//UGlobalGameInstance* Inst = GetWorld()->GetGameInstance<UGlobalGameInstance>();
+	UGlobalGameInstance* Inst = GetWorld()->GetGameInstance<UGlobalGameInstance>();
 
-	//TSubclassOf<UObject> Effect = Inst->GetSubClass(TEXT("Effect"));
+	TSubclassOf<UObject> Effect = Inst->GetSubClass(TEXT("Effect"));
 
-	//TSubclassOf<UObject> RangeAttack = Inst->GetSubClass(TEXT("PlayerRangeAttack"));
+	TSubclassOf<UObject> RangeAttack = Inst->GetSubClass(TEXT("PlayerRangeAttack"));
 
-	//if (nullptr != Effect)
-	//{
-	//	FTransform Trans;
-	//	FVector Pos;
-	//	TArray<UActorComponent*> MeshEffects = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("WeaponEffect"));
-	//	TArray<UActorComponent*> StaticMeshs = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("WeaponMesh"));
+	if (nullptr != Effect)
+	{
+		FTransform Trans;
+		FVector Pos;
+		TArray<UActorComponent*> MeshEffects = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("WeaponEffect"));
+		TArray<UActorComponent*> StaticMeshs = GetComponentsByTag(USceneComponent::StaticClass(), TEXT("WeaponMesh"));
 
-	//	USceneComponent* EffectCom = Cast<USceneComponent>(MeshEffects[0]);
-	//	Pos = EffectCom->GetComponentToWorld().GetLocation();
+		USceneComponent* EffectCom = Cast<USceneComponent>(MeshEffects[0]);
+		Pos = EffectCom->GetComponentToWorld().GetLocation();
 
-	//	//// 이펙트 만들기
-	//	//{
-	//	//	AActor* Actor = GetWorld()->SpawnActor<AActor>(Effect);
-	//	//	// 본의 위치를 얻어오는 법.
-	//	//	// 내가 얻어오고 싶은 정보가 있다. 누가 가지고 있을까?
-	//	//	//USkeletalMeshComponent* SkeletalMeshComponent = GetMesh();
-	//	//	//Trans = SkeletalMeshComponent->GetSocketTransform(TEXT("B_R_Weapon"));
-	//	//	//Pos = Trans.GetLocation();
-	//	//	// UActorComponent* ActorComponent = GetComponentByClass(UStaticMeshComponent::StaticClass());
-	//	//	// TArray<UActorComponent*> ActorComponents = GetComponentsByClass(UStaticMeshComponent::StaticClass());
-	//	//	// UStaticMeshComponent* StaticMeshComponent = Cast<UStaticMeshComponent>(ActorComponents[0]);
-	//	//	// Pos = StaticMeshComponent->GetComponentToWorld().GetLocation();
-	//	//	Actor->SetActorLocation(Pos);
-	//	//	Actor->SetActorRotation(GetActorRotation());
-	//	//	Actor->SetActorScale3D(FVector(0.5f, 0.5f, 0.5f));
-	//	//}
+		//// 이펙트 만들기
+		//{
+		//	AActor* Actor = GetWorld()->SpawnActor<AActor>(Effect);
+		//	// 본의 위치를 얻어오는 법.
+		//	// 내가 얻어오고 싶은 정보가 있다. 누가 가지고 있을까?
+		//	//USkeletalMeshComponent* SkeletalMeshComponent = GetMesh();
+		//	//Trans = SkeletalMeshComponent->GetSocketTransform(TEXT("B_R_Weapon"));
+		//	//Pos = Trans.GetLocation();
+		//	// UActorComponent* ActorComponent = GetComponentByClass(UStaticMeshComponent::StaticClass());
+		//	// TArray<UActorComponent*> ActorComponents = GetComponentsByClass(UStaticMeshComponent::StaticClass());
+		//	// UStaticMeshComponent* StaticMeshComponent = Cast<UStaticMeshComponent>(ActorComponents[0]);
+		//	// Pos = StaticMeshComponent->GetComponentToWorld().GetLocation();
+		//	Actor->SetActorLocation(Pos);
+		//	Actor->SetActorRotation(GetActorRotation());
+		//	Actor->SetActorScale3D(FVector(0.5f, 0.5f, 0.5f));
+		//}
 
-	//	//// 발사체 만들기
-	//	//{
-	//	//	AActor* Actor = GetWorld()->SpawnActor<AActor>(RangeAttack);
-	//	//	Actor->Tags.Add(TEXT("Damage"));
-	//	//	AProjectTile* ProjectTile = Cast<AProjectTile>(Actor);
-	//	//	ProjectTile->SetActorLocation(Pos);
-	//	//	ProjectTile->SetActorRotation(GetActorRotation());
-	//	//	ProjectTile->GetSphereComponent()->SetCollisionProfileName(TEXT("PlayerAttack"), true);
-	//	//}
-	//}
+		// 발사체 만들기
+		{
+			AActor* Actor = GetWorld()->SpawnActor<AActor>(RangeAttack);
+			Actor->Tags.Add(TEXT("Damage"));
+			AProjectTile* ProjectTile = Cast<AProjectTile>(Actor);
+			ProjectTile->SetActorLocation(Pos);
+			ProjectTile->SetActorRotation(GetActorRotation());
+			ProjectTile->GetSphereComponent()->SetCollisionProfileName(TEXT("PlayerAttack"), true);
+		}
+	}
 }
 
 void AAIPlayerCharacter::StatusWindowOnOff()

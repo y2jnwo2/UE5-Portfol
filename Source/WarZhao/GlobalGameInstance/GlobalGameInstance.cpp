@@ -3,6 +3,9 @@
 
 #include "GlobalGameInstance.h"
 #include "Data/GameMeshData.h"
+#include <GlobalGameInstance/Data/SubClassData.h>
+#include <GlobalGameInstance/Data/MonsterData.h>
+#include <GlobalGameInstance/Data/ItemData.h>
 #include <GlobalGameInstance/WarZhaoGlobal.h>
 
 UGlobalGameInstance::UGlobalGameInstance()
@@ -27,10 +30,39 @@ UGlobalGameInstance::UGlobalGameInstance()
 
 		}
 	}
+
+	UWarZhaoGlobal::MainRandom.GenerateNewSeed();
 }
 UGlobalGameInstance::~UGlobalGameInstance()
 {
 
+}
+
+const struct FItemData* UGlobalGameInstance::GetRandomItemData()
+{
+	if (true == ItemDataRandoms.IsEmpty())
+	{
+		return nullptr;
+	}
+
+	return ItemDataRandoms[UWarZhaoGlobal::MainRandom.RandRange(0, ItemDataRandoms.Num() - 1)];
+}
+
+TSubclassOf<UObject> UGlobalGameInstance::GetSubClass(FName _Name)
+{
+	if (nullptr == SubClassData)
+	{
+		return nullptr;
+	}
+
+	FSubClassData* FindTable = SubClassData->FindRow<FSubClassData>(_Name, _Name.ToString());
+
+	if (nullptr == FindTable)
+	{
+		return nullptr;
+	}
+
+	return FindTable->Object;
 }
 
 UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
@@ -50,4 +82,19 @@ UStaticMesh* UGlobalGameInstance::GetMesh(FName _Name)
 	return FindTable->Mesh;
 }
 
-	
+FMonsterData* UGlobalGameInstance::GetMonsterData(FName _Name)
+{
+	if (nullptr == MonsterDatas)
+	{
+		return nullptr;
+	}
+
+	FMonsterData* FindTable = MonsterDatas->FindRow<FMonsterData>(_Name, _Name.ToString());
+
+	if (nullptr == FindTable)
+	{
+		return nullptr;
+	}
+
+	return FindTable;
+}

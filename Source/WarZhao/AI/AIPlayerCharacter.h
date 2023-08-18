@@ -54,5 +54,6 @@ private:
 
 	float Speed = 800.0f;
 
+	int Att = 10;
 	
 };
