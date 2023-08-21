@@ -27,6 +27,7 @@ void UGlobalAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 	{
 		return;
 	}
+	AniState = Character->GetAniState();
 
 	class UAnimMontage* Montage = AllAnimations[AniState];
 
