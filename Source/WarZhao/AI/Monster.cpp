@@ -26,7 +26,7 @@ void AMonster::BeginPlay()
 	{
 		CurMonsterData = Inst->GetMonsterData(DataName);
 
-		//SetAllAnimation(CurMonsterData->MapAnimation);
+		SetAllAnimation(CurMonsterData->MapAnimation);
 		SetAniState(AIState::DEATH);
 	}
 

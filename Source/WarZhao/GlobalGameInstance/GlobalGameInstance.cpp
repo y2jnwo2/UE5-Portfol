@@ -30,6 +30,28 @@ UGlobalGameInstance::UGlobalGameInstance()
 
 		}
 	}
+		{
+			FString DataPath = TEXT("/Script/Engine.DataTable'/Game/BluePrints/Global/Data/DT_GameSubClassData.DT_GameSubClassData'");
+			ConstructorHelpers::FObjectFinder<UDataTable> DataTable(*DataPath);  
+			   
+			if (DataTable.Succeeded())
+			{
+				SubClassData = DataTable.Object;
+			}
+		}
+
+		{
+
+			FString DataPath = TEXT("/Script/Engine.DataTable'/Game/BluePrints/AI/DT_MonsterData.DT_MonsterData'");
+			ConstructorHelpers::FObjectFinder<UDataTable> DataTable(*DataPath);
+
+			if (DataTable.Succeeded())
+			{
+				MonsterDatas = DataTable.Object;
+			}
+
+		
+	}
 
 	UWarZhaoGlobal::MainRandom.GenerateNewSeed();
 }

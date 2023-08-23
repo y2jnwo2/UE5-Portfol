@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Engine/GameInstance.h"
 #include "Engine/DataTable.h"
+#include "WarZhaoGlobal.h"
 #include "GlobalGameInstance.generated.h"
 
 /**
