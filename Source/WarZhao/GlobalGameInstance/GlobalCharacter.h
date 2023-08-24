@@ -81,6 +81,12 @@ public:
 			AllAnimations.Add(static_cast<int>(Pair.Key), Pair.Value);
 		}
 	}
+
+	UFUNCTION()
+	void PushComponent(UActorComponent* _Component)
+	{
+		MgrComponent.Add(_Component);
+	}
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pawn", meta = (AllowPrivateAccess = "true"))
 		float BaseTurnRate;
@@ -118,6 +124,9 @@ protected:
 			bool bFromSweep, const FHitResult& SweepResult);
 
 	virtual void Damage(AActor* _Actor) {}
+
+	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TArray<UActorComponent*> MgrComponent;
 private:
 	virtual void Tick(float DeltaTime) override;
 
@@ -130,5 +139,8 @@ private:
 	class UGlobalAnimInstance* GlobalAnimInstance = nullptr;
 
 	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BluePrintReadWrite, meta = (AllowPrivateAccess = true))
-	int HP = 1;
+	float HP = 1;
+
+	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BluePrintReadWrite, meta = (AllowPrivateAccess = true))
+	float MAXHP = 10;
 };
