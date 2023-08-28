@@ -11,7 +11,7 @@ public class WarZhao : ModuleRules
         PublicIncludePaths.Add(ModuleDirectory);
         PrivateIncludePaths.Add(ModuleDirectory);
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "AIModule" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "AIModule", "NavigationSystem" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

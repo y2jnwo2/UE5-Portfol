@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
+#include <GlobalGameInstance/Data/ItemData.h>
 #include "InventoryItemData.generated.h"
 
 /**
@@ -13,5 +14,9 @@ UCLASS()
 class WARZHAO_API UInventoryItemData : public UObject
 {
 	GENERATED_BODY()
-	
+
+public:
+	class UInvenItemSlot* Widget;
+	int Count = 1;
+	const FItemData* Data;
 };
