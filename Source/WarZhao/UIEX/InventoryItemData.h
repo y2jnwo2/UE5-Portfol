@@ -16,7 +16,7 @@ class WARZHAO_API UInventoryItemData : public UObject
 	GENERATED_BODY()
 
 public:
-	class UInvenItemSlot* Widget;
+	class UInventoryItemSlot* Widget;
 	int Count = 1;
 	const FItemData* Data;
 };

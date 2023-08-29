@@ -9,7 +9,8 @@
 #include "Camera/CameraComponent.h"
 #include <GlobalGameInstance/Data/ItemData.h>
 #include <GlobalGameInstance/ProjectTile.h>
-//#include <GlobalGameInstance/W>
+#include <GlobalGameInstance/WeaponComponent.h>
+#include <UIEX/InventoryItemData.h>
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "AIEnum.h"
@@ -271,4 +272,47 @@ void AAIPlayerCharacter::StatusWindowOnOff()
 	}
 
 	HUD->GetMainWidget()->SetStatusWindowOnOffSwitch();*/
+}
+
+void AAIPlayerCharacter::WeaponChange()
+{
+	UWeaponComponent* Weapon = Cast<UWeaponComponent>(GetComponentByClass(UWeaponComponent::StaticClass()));
+
+	if (nullptr == Weapon)
+	{
+		return;
+	}
+
+	Weapon->ChangeWeaponAdd();
+
+	TArray<AActor*> Actors;
+
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), TEXT("Status"), Actors);
+
+	for (size_t i = 0; i < Actors.Num(); i++)
+	{
+		AActor* Actor = Actors[i];
+
+		UWeaponComponent* StatusWeapon = Cast<UWeaponComponent>(Actor->GetComponentByClass(UWeaponComponent::StaticClass()));
+
+		if (nullptr == StatusWeapon)
+		{
+			continue;
+		}
+
+		StatusWeapon->ArrWeaponMeshs = Weapon->ArrWeaponMeshs;
+		StatusWeapon->ChangeWeaponIndex(Weapon->WeaponIndex);
+	}
+
+}
+
+
+void AAIPlayerCharacter::AttUp(class UInventoryItemData* _Data)
+{
+	if (nullptr == _Data)
+	{
+		return;
+	}
+
+	Att += _Data->Data->Att;
 }

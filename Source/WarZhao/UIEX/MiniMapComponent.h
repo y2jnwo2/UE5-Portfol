@@ -15,7 +15,7 @@ class WARZHAO_API UMiniMapComponent : public USceneComponent
 public:	
 	// Sets default values for this component's properties
 	UMiniMapComponent();
-
+	void MiniMapInit(class AGlobalCharacter* _Owner);
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -23,6 +23,12 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+private:
+	UPROPERTY(Category = "Components", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* SpringArmComponent;
+
+	UPROPERTY(Category = "Components", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	class UStaticMeshComponent* StaticMeshComponent;
 
 		
 };

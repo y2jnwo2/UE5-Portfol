@@ -21,12 +21,18 @@ public:
 
 	void AttackAction();
 	void JumpAction();
+
+	void WeaponChange();
+
 	void MoveRight(float Val);
 	void MoveForward(float Val);
 	void TurnAtRate(float Rate);
 	void LookUpAtRate(float Rate);
 
 	void StatusWindowOnOff();
+
+	UFUNCTION(BlueprintCallable)
+	void AttUp(class UInventoryItemData* _Data);
 
 protected:
 	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
