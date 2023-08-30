@@ -18,12 +18,11 @@ void AGameHUD::BeginPlay()
 	Super::BeginPlay();
 
 	// 실제 존재하는 블루프린트의 레퍼런스를 경로를 가져오는 방법은 아래와 같다.
-	FSoftClassPath ClassPath(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/BluePrints/UIEx/WBP_UIEx.WBP_UIEx'"));
+	FSoftClassPath ClassPath(TEXT("/Script/UMGEditor.WidgetBlueprint'/Game/BluePrints/UIEx/WBP_UIEx.WBP_UIEx_C'"));
 	TSubclassOf<UUserWidget> MainWidgetClass = ClassPath.TryLoadClass<UUserWidget>();
 	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), MainWidgetClass);
 	MainWidget = Cast<UMainWidget>(Widget);
 	MainWidget->AddToViewport();
-
 	//{
 	//	UUserWidget* Window = Cast<UUserWidget>(MainWidget->GetWidgetFromName(TEXT("TalkTextWindow")));
 
@@ -33,9 +32,9 @@ void AGameHUD::BeginPlay()
 
 	//}
 
-	//{
-	//	UUserWidget* Window = Cast<UUserWidget>(MainWidget->GetWidgetFromName(TEXT("StatusWindow")));
-	//}
+	{
+		UUserWidget* Window = Cast<UUserWidget>(MainWidget->GetWidgetFromName(TEXT("StatusWindow")));
+	}
 
 }
 
