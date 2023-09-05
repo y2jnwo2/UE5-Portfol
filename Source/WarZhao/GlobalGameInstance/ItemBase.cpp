@@ -4,6 +4,8 @@
 #include "GlobalGameInstance/ItemBase.h"
 #include "GlobalGameInstance.h"
 #include "Kismet/GameplayStatics.h"
+#include <UIEX/InventoryUserWidget.h>
+#include <UIEX/GameHUD.h>
 
 // Sets default values
 AItemBase::AItemBase()
@@ -41,3 +43,28 @@ void AItemBase::Tick(float DeltaTime)
 
 }
 
+void AItemBase::Take(AActor* _Actor)
+{
+	APlayerController* Con = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	AGameHUD* HUD = Con->GetHUD<AGameHUD>();
+
+	if (nullptr == HUD)
+	{
+		return;
+	}
+	
+	UMainWidget* Widget = HUD->GetMainWidget();
+	if (nullptr == Widget)
+	{
+		return;
+	}
+	
+	UWidget* InvenWidget = Widget->GetWidgetFromName(TEXT("WBP_Inventory"));
+	UInventoryUserWidget* Inventory = Cast<UInventoryUserWidget>(InvenWidget);
+	if (nullptr == Inventory)
+	{
+		return;
+	}
+
+	Inventory->AddGameItem(Data);
+}

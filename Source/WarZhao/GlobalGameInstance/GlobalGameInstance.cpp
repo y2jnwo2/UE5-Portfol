@@ -30,6 +30,24 @@ UGlobalGameInstance::UGlobalGameInstance()
 
 		}
 	}
+
+	{
+		FString DataPath = TEXT("/Script/Engine.DataTable'/Game/BluePrints/Global/Data/DT_GameItemData.DT_GameItemData'");
+		ConstructorHelpers::FObjectFinder<UDataTable> DataTable(*DataPath);
+
+		if (DataTable.Succeeded())
+		{
+			ItemDatas = DataTable.Object;
+
+			TArray<FName> ArrayName = ItemDatas->GetRowNames();
+
+			for (size_t i = 0; i < ArrayName.Num(); i++)
+			{
+				FItemData* ItemData = ItemDatas->FindRow<FItemData>(ArrayName[i], ArrayName[i].ToString());
+				ItemDataRandoms.Add(ItemData);
+			}
+		}
+	}
 		{
 			FString DataPath = TEXT("/Script/Engine.DataTable'/Game/BluePrints/Global/Data/DT_GameSubClassData.DT_GameSubClassData'");
 			ConstructorHelpers::FObjectFinder<UDataTable> DataTable(*DataPath);  
