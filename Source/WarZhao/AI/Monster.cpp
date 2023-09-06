@@ -66,7 +66,7 @@ void AMonster::Destroyed()
 			// 그냥 내가 죽을때 어떤 액터를 만들뿐이다.
 			AActor* Actor = GetWorld()->SpawnActor<AActor>(Item);
 			Actor->Tags.Add(TEXT("Item"));
-			Actor->SetActorLocation(GetActorLocation());
+			Actor->SetActorLocation(GetActorLocation()+ RandomPos);
 		}
 	}
 }

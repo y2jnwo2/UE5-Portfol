@@ -48,6 +48,8 @@ void UInventoryItemSlot::SlotDataCheck()
 
 	if (nullptr != ItemData->Data)
 	{
+		/*if (nullptr == ItemData->Data)
+			return;*/
 		ItemIconVisibility = ESlateVisibility::Visible;
 		ItemIconImage->SetBrushFromTexture(Cast<UTexture2D>(ItemData->Data->Icon));
 		ItemCountValue = ItemData->Count;
