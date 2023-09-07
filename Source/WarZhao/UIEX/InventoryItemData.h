@@ -17,6 +17,7 @@ class WARZHAO_API UInventoryItemData : public UObject
 
 public:
 	class UInventoryItemSlot* Widget;
+	int Index = 0;
 	int Count = 1;
 	const FItemData* Data;
 };

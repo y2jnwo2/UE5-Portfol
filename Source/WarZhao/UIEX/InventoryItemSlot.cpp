@@ -32,10 +32,7 @@ void UInventoryItemSlot::SlotDataCheck()
 	if (nullptr == ItemData)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%S(%u)> if (nullptr == ItemData)"), __FUNCTION__, __LINE__);
-		// 치명적인 에러
-		//ItemBackVisibility = ESlateVisibility::Visible;
-		//ItemIconVisibility = ESlateVisibility::Hidden;
-		//ItemCountVisibility = ESlateVisibility::Hidden;
+		
 		return;
 	}
 
@@ -44,15 +41,15 @@ void UInventoryItemSlot::SlotDataCheck()
 		ItemBackVisibility = ESlateVisibility::Visible;
 		ItemIconVisibility = ESlateVisibility::Hidden;
 			ItemCountVisibility = ESlateVisibility::Hidden;
+			return;
 	}
 
 	if (nullptr != ItemData->Data)
 	{
-		/*if (nullptr == ItemData->Data)
-			return;*/
 		ItemIconVisibility = ESlateVisibility::Visible;
 		ItemIconImage->SetBrushFromTexture(Cast<UTexture2D>(ItemData->Data->Icon));
 		ItemCountValue = ItemData->Count;
+		
 
 		if (1 < ItemData->Data->StackMax)
 		{
@@ -62,8 +59,10 @@ void UInventoryItemSlot::SlotDataCheck()
 		{
 			ItemCountVisibility = ESlateVisibility::Hidden;
 		}
+
 	}
 }
+
 
 void UInventoryItemSlot::DragSetting(UInventoryItemSlot* _OtherDragSlot)
 {
@@ -87,10 +86,17 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 	{
 		return;
 	}
+	if (_OtherDragSlot->IsStatus == true && ItemData->Data != nullptr)
+	{
+		if (_OtherDragSlot->ItemData->Data->Type != ItemData->Data->Type)
+		{
+			return;
+		}
+	}
 
-	UInventoryItemData* SwapItemData = _OtherDragSlot->ItemData;
-	_OtherDragSlot->ItemData = ItemData;
-	ItemData = SwapItemData;
+	const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+	_OtherDragSlot->ItemData->Data = ItemData->Data;
+	ItemData->Data = SwapItemData;
 
 	if (true == ItemChangeFunction.IsBound())
 	{

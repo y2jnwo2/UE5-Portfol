@@ -45,6 +45,9 @@ public:
 	UPROPERTY(Category = "Count", EditAnywhere, BlueprintReadWrite)
 	int ItemCountValue = 0;
 
+	UPROPERTY(Category = "Count", EditAnywhere, BlueprintReadWrite)
+	bool IsStatus;
+
 	void NativeConstruct() override;
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
@@ -77,7 +80,7 @@ public:
 	{
 		return ItemData;
 	}
-
+	
 private:
 	UInventoryItemData* ItemData = nullptr;
 };

@@ -27,8 +27,12 @@ public:
 protected:
 	void NativeConstruct() override;
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
-
+	
 private:
 	UPROPERTY(Category = "Effect", EditAnywhere, BlueprintReadWrite, meta = (AllowprivateAccess = "true"))
 	class UTileView* InvenList = nullptr;
+
+	TArray<UUserWidget*> Widget;
 };
+
+

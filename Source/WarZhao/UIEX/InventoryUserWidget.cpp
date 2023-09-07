@@ -20,6 +20,7 @@ void UInventoryUserWidget::NativeConstruct()
 	{
 		UInventoryItemData* ItemObject = NewObject<UInventoryItemData>();
 		ItemObject->Data = nullptr;
+		ItemObject->Index = i;
 		InvenList->AddItem(ItemObject);
 	}
 
@@ -61,6 +62,12 @@ void UInventoryUserWidget::AddInvenItem(UObject* _Data, UUserWidget* _Widget)
 		return;
 	}
 	InvenSlotData->Widget = ItemSlotWidget;
+
+	UImage* Select = Cast<UImage>(ItemSlotWidget->GetWidgetFromName(TEXT("Select")));
+	if (InvenSlotData->Index != 0)
+	{
+		Select->SetVisibility(ESlateVisibility::Hidden);
+	}
 	ItemSlotWidget->SetItemData(InvenSlotData);
 }
 
@@ -75,6 +82,13 @@ void UInventoryUserWidget::AddGameItem(const FItemData* Data)
 		{
 			DataObject->Data = Data;
 
+			return;
+		}
+
+		if (DataObject->Data == Data
+			&& DataObject->Count < Data->StackMax)
+		{
+			++DataObject->Count;
 			return;
 		}
 	}
