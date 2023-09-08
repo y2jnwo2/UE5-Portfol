@@ -94,10 +94,59 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 		}
 	}
 
-	const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
-	_OtherDragSlot->ItemData->Data = ItemData->Data;
-	ItemData->Data = SwapItemData;
+	if (this->ItemData->Data != nullptr)
+	{
+		if (_OtherDragSlot->ItemData->Data->Type != ItemType::POSTION &&
+			ItemData->Data->Type != ItemType::POSTION)
+		{
+			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+			_OtherDragSlot->ItemData->Data = ItemData->Data;
+			ItemData->Data = SwapItemData;
+		}
 
+	
+
+		else if (_OtherDragSlot->ItemData->Data->Type != ItemType::POSTION &&
+			ItemData->Data->Type != ItemType::NONE)
+		{
+			const int PotionCount = _OtherDragSlot->ItemData->Count;
+			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+			_OtherDragSlot->ItemData->Data = ItemData->Data;
+			_OtherDragSlot->ItemData->Count = ItemData->Count;
+			ItemData->Data = SwapItemData;
+			ItemData->Count = PotionCount;
+		}
+
+		else if (_OtherDragSlot->ItemData->Data->Type == ItemType::POSTION ||
+			ItemData->Data->Type != ItemType::NONE)
+		{
+			const int PotionCount = _OtherDragSlot->ItemData->Count;
+			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+			_OtherDragSlot->ItemData->Data = ItemData->Data;
+			_OtherDragSlot->ItemData->Count = ItemData->Count;
+			ItemData->Data = SwapItemData;
+			ItemData->Count = PotionCount;
+		}
+	}
+	else
+	{
+		if (_OtherDragSlot->ItemData->Data->Type != ItemType::POSTION)
+		{
+			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+			_OtherDragSlot->ItemData->Data = ItemData->Data;
+			ItemData->Data = SwapItemData;
+		}
+		else
+		{
+			const int PotionCount = _OtherDragSlot->ItemData->Count;
+			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
+			_OtherDragSlot->ItemData->Data = ItemData->Data;
+			_OtherDragSlot->ItemData->Count = ItemData->Count;
+			ItemData->Data = SwapItemData;
+			ItemData->Count = PotionCount;
+		}
+	}
+	
 	if (true == ItemChangeFunction.IsBound())
 	{
 		ItemChangeFunction.Broadcast();
