@@ -48,6 +48,9 @@ public:
 	UPROPERTY(Category = "Count", EditAnywhere, BlueprintReadWrite)
 	bool IsStatus;
 
+	UPROPERTY(Category = "Count", EditAnywhere, BlueprintReadWrite)
+	bool IsOutCursor;
+
 	void NativeConstruct() override;
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
@@ -65,6 +68,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void MoveSetting(UInventoryItemSlot* _OtherDragSlot);
+	
+	UFUNCTION(BlueprintCallable)
+	void DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsEmpty()
@@ -80,6 +86,7 @@ public:
 	{
 		return ItemData;
 	}
+
 	
 private:
 	UInventoryItemData* ItemData = nullptr;

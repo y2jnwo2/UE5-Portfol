@@ -155,3 +155,23 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 	SlotDataCheck();
 	_OtherDragSlot->SlotDataCheck();
 }
+
+UFUNCTION(BlueprintCallable)
+void UInventoryItemSlot::DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor)
+{
+	if (OutCursor == true)
+	{
+		if (_OtherDragSlot->ItemData == nullptr)
+		{
+			return;
+		}
+		else
+		{
+			_OtherDragSlot->ItemData->Count -= 1;
+		}
+
+	}
+	SlotDataCheck();
+	_OtherDragSlot->SlotDataCheck();
+}
+

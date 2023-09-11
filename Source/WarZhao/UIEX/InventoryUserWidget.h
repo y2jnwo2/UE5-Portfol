@@ -24,6 +24,7 @@ public:
 	void NewWidget(UUserWidget* _Widget);
 	void AddGameItem(const struct FItemData* Data);
 
+	
 protected:
 	void NativeConstruct() override;
 	void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
