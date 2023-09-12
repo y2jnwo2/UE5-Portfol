@@ -70,7 +70,7 @@ public:
 	void MoveSetting(UInventoryItemSlot* _OtherDragSlot);
 	
 	UFUNCTION(BlueprintCallable)
-	void DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor);
+	void DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor, bool IsDrop);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsEmpty()

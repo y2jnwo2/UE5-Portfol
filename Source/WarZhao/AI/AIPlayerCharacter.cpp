@@ -14,6 +14,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "AIEnum.h"
+#include <WarZhao/WarCharacter/WarAnimInstance.h>
 
 AAIPlayerCharacter::AAIPlayerCharacter()
 {
@@ -28,6 +29,13 @@ AAIPlayerCharacter::AAIPlayerCharacter()
 	CameraComponent->FieldOfView = 45.0f;
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	// SpringArmComponent
+
+	// 처음엔 공격중이 아니니 false로 시작
+	bIsAttacking = false;
+
+	ComboIndex = 0;
+
+	bCanComboAttack = false;
 }
 
 void AAIPlayerCharacter::Tick(float _Delta)
@@ -73,6 +81,8 @@ void AAIPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("StatusWindow"), EKeys::Zero));
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("InventoryWindow"), EKeys::I));
+
+		PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AAIPlayerCharacter::OnAttack);
 	}
 
 	// 키와 함수를 연결합니다.
@@ -316,4 +326,45 @@ void AAIPlayerCharacter::AttUp(class UInventoryItemData* _Data)
 	}
 
 	Att += _Data->Data->Att;
+}
+
+// 콤보공격 구현
+void AAIPlayerCharacter::OnAttack()
+{
+	if (bIsAttacking == false)
+	{
+		StartAttack();
+		bIsAttacking = true;
+	}
+
+	else if (bIsAttacking == true)
+	{
+		bCanComboAttack = true;
+	}
+}
+
+void AAIPlayerCharacter::StartAttack()
+{
+
+
+	UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
+
+	if (!AnimInstance || !AttackMontage)
+	{
+		return;
+	}
+
+	if (AnimInstance->Montage_IsPlaying(AttackMontage) == false)
+	{
+
+		AnimInstance->Montage_Play(AttackMontage);
+
+	}
+
+	else if (AnimInstance->Montage_IsPlaying(AttackMontage))
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		AnimInstance->Montage_JumpToSection(FName(ComboSections[ComboIndex]), AttackMontage);
+	}
+
 }

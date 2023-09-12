@@ -75,10 +75,12 @@ void UInventoryItemSlot::DragSetting(UInventoryItemSlot* _OtherDragSlot)
 		SetItemData(_OtherDragSlot->ItemData);
 }
 
+
 void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 {
 	if (_OtherDragSlot == this)
 	{
+		
 		return;
 	}
 
@@ -130,6 +132,8 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 	}
 	else
 	{
+		if (_OtherDragSlot->ItemData->Data == nullptr)
+			return;
 		if (_OtherDragSlot->ItemData->Data->Type != ItemType::POSTION)
 		{
 			const FItemData* SwapItemData = _OtherDragSlot->ItemData->Data;
@@ -145,6 +149,8 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 			ItemData->Data = SwapItemData;
 			ItemData->Count = PotionCount;
 		}
+
+		
 	}
 	
 	if (true == ItemChangeFunction.IsBound())
@@ -156,10 +162,11 @@ void UInventoryItemSlot::MoveSetting(UInventoryItemSlot* _OtherDragSlot)
 	_OtherDragSlot->SlotDataCheck();
 }
 
-UFUNCTION(BlueprintCallable)
-void UInventoryItemSlot::DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor)
+void UInventoryItemSlot::DropSetting(UInventoryItemSlot* _OtherDragSlot, bool OutCursor, bool IsDrop)
 {
-	if (OutCursor == true)
+
+	// ¶¥¿¡ ¹ö¸®±â 
+	if (OutCursor == true && IsDrop)
 	{
 		if (_OtherDragSlot->ItemData == nullptr)
 		{
@@ -171,7 +178,7 @@ void UInventoryItemSlot::DropSetting(UInventoryItemSlot* _OtherDragSlot, bool Ou
 		}
 
 	}
-	SlotDataCheck();
-	_OtherDragSlot->SlotDataCheck();
+
 }
+
 

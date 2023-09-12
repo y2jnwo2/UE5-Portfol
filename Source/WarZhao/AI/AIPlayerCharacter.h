@@ -39,6 +39,23 @@ protected:
 
 	void BeginPlay() override;
 
+	// 콤보 공격 
+	UFUNCTION()
+	void OnAttack();
+
+	UFUNCTION()
+	void StartAttack();
+
+	UPROPERTY(Category = "Anim", EditAnyWhere, BlueprintReadWrite)
+	class UAnimMontage* AttackMontage;
+
+	bool bIsAttacking;
+	TArray<FString> ComboSections = { TEXT("Combo0"), TEXT("Combo1"), TEXT("Combo2"), TEXT("Combo3") };
+	int32 ComboIndex;
+
+	// 공격중일때 다시 공격버튼 입력되면 콤보 시전
+	bool bCanComboAttack;
+
 private:
 
 	UPROPERTY(Category = "Component", EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
@@ -61,5 +78,5 @@ private:
 	float Speed = 800.0f;
 
 	int Att = 10;
-	
+
 };
