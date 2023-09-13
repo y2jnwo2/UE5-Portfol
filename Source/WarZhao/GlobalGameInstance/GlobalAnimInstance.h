@@ -37,6 +37,17 @@ public :
 	{
 		DefaultAniState = _DefaultState;
 	}
+
+	// 콤보 어택 구현
+	UFUNCTION()
+	void AnimNotify_AttackEnd();
+
+	UFUNCTION()
+	void AnimNotify_CheckComboAttack();
+
+	UFUNCTION()
+	void AnimNotify_InitComboAttack();
+
 protected:
 	void NativeBeginPlay() override;
 	void NativeUpdateAnimation(float _DeltaTime) override;

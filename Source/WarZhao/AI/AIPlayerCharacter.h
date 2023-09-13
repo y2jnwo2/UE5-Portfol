@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GlobalGameInstance/GlobalCharacter.h"
 #include "AI/AIEnum.h"
+#include <WarCharacter/EnumsAll.h>
 #include "AIPlayerCharacter.generated.h"
 
 /**
@@ -34,11 +35,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void AttUp(class UInventoryItemData* _Data);
 
-protected:
-	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	void BeginPlay() override;
-
 	// 콤보 공격 
 	UFUNCTION()
 	void OnAttack();
@@ -50,11 +46,19 @@ protected:
 	class UAnimMontage* AttackMontage;
 
 	bool bIsAttacking;
+
 	TArray<FString> ComboSections = { TEXT("Combo0"), TEXT("Combo1"), TEXT("Combo2"), TEXT("Combo3") };
 	int32 ComboIndex;
 
 	// 공격중일때 다시 공격버튼 입력되면 콤보 시전
 	bool bCanComboAttack;
+
+protected:
+	void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	void BeginPlay() override;
+
+	
 
 private:
 
@@ -68,6 +72,10 @@ private:
 
 	UPROPERTY(Category = "Component", EditAnyWhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		TMap<AIAniState, class UAnimMontage*> MapAnimation;
+	// 공격안돼서 추가했다.
+	UPROPERTY(Category = "GameModeValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		WarAniState AniState2 = WarAniState::Idle;
+
 
 	UFUNCTION()
 		void MontageEnd(UAnimMontage* Anim, bool _Inter);

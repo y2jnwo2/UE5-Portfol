@@ -36,6 +36,9 @@ AAIPlayerCharacter::AAIPlayerCharacter()
 	ComboIndex = 0;
 
 	bCanComboAttack = false;
+
+
+
 }
 
 void AAIPlayerCharacter::Tick(float _Delta)
@@ -46,11 +49,21 @@ void AAIPlayerCharacter::Tick(float _Delta)
 	{
 		Move->MaxWalkSpeed = Speed;
 	}
+
+	if (AniState2 != WarAniState::Attack)
+	{
+		//WeaponMesh->SetGenerateOverlapEvents(false);
+	}
+	if (bIsAttacking == false && AniState2 != WarAniState::Attack)
+	{
+		//WeaponMesh->SetGenerateOverlapEvents(false);
+	}
 	else
 	{
 		Move->MaxWalkSpeed = Speed * 0.6f;
+		//WeaponMesh->SetGenerateOverlapEvents(true);
 	}
-
+	
 	// SpringArmComponent->AddLocalRotation();
 	// AddControllerYawInput(100);
 }
@@ -82,7 +95,6 @@ void AAIPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("StatusWindow"), EKeys::Zero));
 		UPlayerInput::AddEngineDefinedActionMapping(FInputActionKeyMapping(TEXT("InventoryWindow"), EKeys::I));
 
-		PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AAIPlayerCharacter::OnAttack);
 	}
 
 	// 키와 함수를 연결합니다.
@@ -97,6 +109,8 @@ void AAIPlayerCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 
 	PlayerInputComponent->BindAction("PlayerAttack", EInputEvent::IE_Pressed, this, &AAIPlayerCharacter::AttackAction);
 	PlayerInputComponent->BindAction("PlayerJumpAction", EInputEvent::IE_Pressed, this, &AAIPlayerCharacter::JumpAction);
+
+	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AAIPlayerCharacter::OnAttack);
 
 	PlayerInputComponent->BindAction("StatusWindow", EInputEvent::IE_Pressed
 		, this, &AAIPlayerCharacter::StatusWindowOnOff);
@@ -114,6 +128,9 @@ void AAIPlayerCharacter::BeginPlay()
 	GetGlobalAnimInstance()->OnPlayMontageNotifyBegin.AddDynamic(this, &AAIPlayerCharacter::AnimNotifyBegin);
 
 	SetAniState(AIAniState::Idle);
+
+	
+
 }
 
 void AAIPlayerCharacter::AttackAction()
@@ -168,7 +185,6 @@ void AAIPlayerCharacter::MoveForward(float Val)
 	{
 		return;
 	}
-
 	if (Val != 0.f)
 	{
 		if (Controller)
@@ -347,7 +363,7 @@ void AAIPlayerCharacter::StartAttack()
 {
 
 
-	UWarAnimInstance* AnimInstance = Cast<UWarAnimInstance>(GetMesh()->GetAnimInstance());
+	UGlobalAnimInstance* AnimInstance = Cast<UGlobalAnimInstance>(GetMesh()->GetAnimInstance());
 
 	if (!AnimInstance || !AttackMontage)
 	{

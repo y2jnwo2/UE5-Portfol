@@ -5,6 +5,8 @@
 #include "GlobalCharacter.h"
 #include <GlobalGameInstance/Data/MonsterData.h>
 #include "WarZhaoGlobal.h"
+#include <AI/AIPlayerCharacter.h>
+#include <Kismet/GameplayStatics.h>
 
 void UGlobalAnimInstance::NativeBeginPlay()
 {
@@ -21,7 +23,7 @@ void UGlobalAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 		return;
 	}
 
-	AGlobalCharacter* Character = Cast<AGlobalCharacter>(GetOwningActor());
+	AAIPlayerCharacter* Character = Cast<AAIPlayerCharacter>(GetOwningActor());
 
 	if (nullptr == Character && false == Character->IsValidLowLevel())
 	{
@@ -38,11 +40,61 @@ void UGlobalAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 
 	if (false == Montage_IsPlaying(Montage))
 	{
-		CurMontage = Montage;
-		Montage_Play(Montage, 1.0f);
+		if (Character->bIsAttacking == false)
+		{
+			CurMontage = Montage;
+			Montage_Play(Montage, 1.0f);
+		}
 	}
 }
-	void UGlobalAnimInstance::MontageEnd(UAnimMontage * Anim, bool _Inter)
-	{
+void UGlobalAnimInstance::MontageEnd(UAnimMontage * Anim, bool _Inter)
+{
 
+}
+
+void UGlobalAnimInstance::AnimNotify_AttackEnd()
+{
+	AAIPlayerCharacter* PlayerAvatar = Cast<AAIPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+	if (PlayerAvatar)
+	{
+		PlayerAvatar->bIsAttacking = false;
 	}
+}
+
+void UGlobalAnimInstance::AnimNotify_CheckComboAttack()
+{
+	AAIPlayerCharacter* PlayerAvatar = Cast<AAIPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	if (PlayerAvatar->ComboIndex >= PlayerAvatar->ComboSections.Num() - 1)
+	{
+		PlayerAvatar->ComboIndex = 0;
+	}
+
+	if (PlayerAvatar->bCanComboAttack == true)
+	{
+		PlayerAvatar->ComboIndex++;
+		PlayerAvatar->bCanComboAttack = false;
+		PlayerAvatar->StartAttack();
+	}
+	else if (PlayerAvatar->bCanComboAttack == false)
+	{
+		PlayerAvatar->ComboIndex = 0;
+	}
+
+	/*if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10.0f, FColor::MakeRandomColor(),
+			FString::Printf(TEXT("ComboIndex : %d"), PlayerAvatar->ComboIndex));
+	}*/
+}
+
+void UGlobalAnimInstance::AnimNotify_InitComboAttack()
+{
+	AAIPlayerCharacter* PlayerAvatar = Cast<AAIPlayerCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
+
+	if (PlayerAvatar)
+	{
+		PlayerAvatar->ComboIndex = 0;
+		PlayerAvatar->bCanComboAttack = false;
+	}
+}
