@@ -23,12 +23,19 @@ void UGlobalAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 		return;
 	}
 
-	AAIPlayerCharacter* Character = Cast<AAIPlayerCharacter>(GetOwningActor());
+	AGlobalCharacter* Character = Cast<AGlobalCharacter>(GetOwningActor());
+	AAIPlayerCharacter* Player = Cast<AAIPlayerCharacter>(GetOwningActor());
 
 	if (nullptr == Character && false == Character->IsValidLowLevel())
 	{
 		return;
 	}
+
+	if (!Character->ActorHasTag("Monster") && nullptr == Player && false == Player->IsValidLowLevel())
+	{
+		return;
+	}
+	
 	AniState = Character->GetAniState();
 
 	class UAnimMontage* Montage = AllAnimations[AniState];
@@ -40,12 +47,14 @@ void UGlobalAnimInstance::NativeUpdateAnimation(float _DeltaTime)
 
 	if (false == Montage_IsPlaying(Montage))
 	{
-		if (Character->bIsAttacking == false)
+		
+		if (Character->ActorHasTag("Monster") || Player->bIsAttacking == false )
 		{
 			CurMontage = Montage;
 			Montage_Play(Montage, 1.0f);
 		}
 	}
+	
 }
 void UGlobalAnimInstance::MontageEnd(UAnimMontage * Anim, bool _Inter)
 {
