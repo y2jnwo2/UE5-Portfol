@@ -145,8 +145,11 @@ void AAIPlayerCharacter::AttackAction()
 void AAIPlayerCharacter::JumpAction()
 {
 
-	Jump();
-	SetAniState(AIAniState::Jump);
+	if (bIsAttacking == false && GetAniState() != 7)
+	{
+		Jump();
+		SetAniState(AIAniState::Jump);
+	}
 }
 void AAIPlayerCharacter::MoveRight(float Val)
 {
