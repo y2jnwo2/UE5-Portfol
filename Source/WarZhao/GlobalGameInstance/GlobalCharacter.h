@@ -123,10 +123,16 @@ protected:
 			int32 OtherBOdyIndex,
 			bool bFromSweep, const FHitResult& SweepResult);
 
+
 	virtual void Damage(AActor* _Actor) {}
 
 	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TArray<UActorComponent*> MgrComponent;
+	
+	// ³Ë¹é
+	virtual void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride) override;
+
+	UCharacterMovementComponent* CharacterMovement;
 private:
 	virtual void Tick(float DeltaTime) override;
 

@@ -27,5 +27,10 @@ struct WARZHAO_API FMonsterData : public FTableRowBase
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
 		TMap<AIState, class UAnimMontage*> MapAnimation;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		float SearchRange;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data")
+		float AttackRange;
 };

@@ -40,7 +40,7 @@ void AItemBase::BeginPlay()
 void AItemBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 void AItemBase::Take(AActor* _Actor)

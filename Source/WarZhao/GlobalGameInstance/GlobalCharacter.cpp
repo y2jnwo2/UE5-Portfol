@@ -3,6 +3,7 @@
 
 #include "GlobalGameInstance/GlobalCharacter.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AGlobalCharacter::AGlobalCharacter()
@@ -32,7 +33,6 @@ void AGlobalCharacter::BeginPlay()
 void AGlobalCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -50,6 +50,38 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 {
 	if (true == OtherComp->ComponentHasTag(TEXT("Damage")))
 	{
-		HP -= 1;
+		LaunchCharacter(FVector(800.f, 0.f, 300), false, false);
+		//HP -= 1;
 	}
 }
+
+// ³Ë¹é±¸Çö
+void AGlobalCharacter::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride)
+{
+	CharacterMovement = this->GetCharacterMovement();
+
+	if (nullptr == this->CharacterMovement)
+	{
+		return;
+	}
+	if (this->CharacterMovement)
+	{
+		FVector FinalVel = LaunchVelocity;
+		const FVector Velocity = GetVelocity();
+
+		if (!bXYOverride)
+		{
+			FinalVel.X += Velocity.X;
+			FinalVel.Y += Velocity.Y;
+		}
+		if (!bZOverride)
+		{
+			FinalVel.Z += Velocity.Z;
+		}
+
+		CharacterMovement->Launch(FinalVel);
+
+		OnLaunched(LaunchVelocity, bXYOverride, bZOverride);
+	}
+}
+
