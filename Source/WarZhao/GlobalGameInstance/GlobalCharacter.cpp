@@ -4,6 +4,7 @@
 #include "GlobalGameInstance/GlobalCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include <Kismet/GameplayStatics.h>
 
 // Sets default values
 AGlobalCharacter::AGlobalCharacter()
@@ -48,9 +49,39 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 	int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
 {
+	
+
 	if (true == OtherComp->ComponentHasTag(TEXT("Damage")))
 	{
-		LaunchCharacter(FVector(800.f, 0.f, 300), false, false);
+		
+		FVector PlayerPos = OtherActor->GetActorLocation();
+		AGlobalCharacter* Character = Cast<AGlobalCharacter>(SweepResult.GetActor());
+
+
+		if (nullptr == Character)
+		{
+			return;
+		}
+
+		if (true == Character->ActorHasTag("Monster"))
+		{
+			Character->SetActorLocation(FVector(Character->GetActorLocation().X, Character->GetActorLocation().Y, Character->GetActorLocation().Z + 30.f));
+
+			FVector EnemyPos = Character->GetActorLocation();
+			FVector Dist = (EnemyPos - PlayerPos);
+			FVector NormalizedDist = Dist.GetSafeNormal();
+
+			CharacterMovement = Character->GetCharacterMovement();
+
+			if (CharacterMovement == nullptr)
+			{
+				return;
+			}
+			CharacterMovement->AddImpulse(NormalizedDist * KnockBackForce);
+			//LaunchCharacter(NormalizedDist * KnockBackForce, false, false);
+
+		}
+
 		//HP -= 1;
 	}
 }
@@ -66,6 +97,7 @@ void AGlobalCharacter::LaunchCharacter(FVector LaunchVelocity, bool bXYOverride,
 	}
 	if (this->CharacterMovement)
 	{
+
 		FVector FinalVel = LaunchVelocity;
 		const FVector Velocity = GetVelocity();
 

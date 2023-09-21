@@ -132,6 +132,9 @@ protected:
 	// ³Ë¹é
 	virtual void LaunchCharacter(FVector LaunchVelocity, bool bXYOverride, bool bZOverride) override;
 
+	UPROPERTY(EditAnyWhere,Category = "Force")
+	float KnockBackForce = 500.f;
+
 	UCharacterMovementComponent* CharacterMovement;
 private:
 	virtual void Tick(float DeltaTime) override;
