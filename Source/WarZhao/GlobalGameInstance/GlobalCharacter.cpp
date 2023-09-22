@@ -65,7 +65,7 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 
 		if (true == Character->ActorHasTag("Monster"))
 		{
-			Character->SetActorLocation(FVector(Character->GetActorLocation().X, Character->GetActorLocation().Y, Character->GetActorLocation().Z + 50.f));
+			//Character->SetActorLocation(FVector(Character->GetActorLocation().X, Character->GetActorLocation().Y, Character->GetActorLocation().Z + 50.f));
 
 			FVector EnemyPos = Character->GetActorLocation();
 			FVector Dist = (EnemyPos - PlayerPos);
@@ -78,7 +78,7 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 				return;
 			}
 			//CharacterMovement->AddImpulse(NormalizedDist * KnockBackForce, false);
-			Character->LaunchCharacter(NormalizedDist * KnockBackForce, false, false);
+			//Character->LaunchCharacter(NormalizedDist * KnockBackForce, false, false);
 
 		}
 

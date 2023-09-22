@@ -4,7 +4,6 @@
 #include "BT_Task_AIBase.h"
 #include "Kismet/GameplayStatics.h"
 
-
 UBT_Task_AIBase::UBT_Task_AIBase()
 {
 	bNotifyTick = true;
@@ -95,6 +94,8 @@ UBlackboardComponent* UBT_Task_AIBase::GetBlackboardComponent(UBehaviorTreeCompo
 
 	return BlockBoard;
 }
+
+
 
 EBTNodeResult::Type UBT_Task_AIBase::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
