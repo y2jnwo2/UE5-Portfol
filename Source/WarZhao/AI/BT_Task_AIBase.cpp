@@ -104,15 +104,15 @@ EBTNodeResult::Type UBT_Task_AIBase::ExecuteTask(UBehaviorTreeComponent& OwnerCo
 
 void UBT_Task_AIBase::SetStateChange(UBehaviorTreeComponent& OwnerComp, uint8 _State)
 {
-	UBlackboardComponent* BlockBoard = OwnerComp.GetBlackboardComponent();
+	UBlackboardComponent* BlackBoard = OwnerComp.GetBlackboardComponent();
 
-	if (nullptr == BlockBoard)
+	if (nullptr == BlackBoard)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%S(%u)> if (nullptr == BlockBoard)"), __FUNCTION__, __LINE__);
 		return;
 	}
 
-	BlockBoard->SetValueAsEnum(TEXT("AIState"), _State);
+	BlackBoard->SetValueAsEnum(TEXT("AIState"), _State);
 
 	ResetStateTime(OwnerComp);
 
@@ -122,17 +122,17 @@ void UBT_Task_AIBase::SetStateChange(UBehaviorTreeComponent& OwnerComp, uint8 _S
 
 void UBT_Task_AIBase::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DelataSeconds)
 {
-	UBlackboardComponent* BlockBoard = OwnerComp.GetBlackboardComponent();
+	UBlackboardComponent* BlackBoard = OwnerComp.GetBlackboardComponent();
 
-	if (nullptr == BlockBoard)
+	if (nullptr == BlackBoard)
 	{
 		UE_LOG(LogTemp, Error, TEXT("%S(%u)> if (nullptr == BlockBoard)"), __FUNCTION__, __LINE__);
 		return;
 	}
 
-	float StateTime = BlockBoard->GetValueAsFloat(TEXT("StateTime"));
+	float StateTime = BlackBoard->GetValueAsFloat(TEXT("StateTime"));
 	StateTime += DelataSeconds;
-	BlockBoard->SetValueAsFloat(TEXT("StateTime"), StateTime);
+	BlackBoard->SetValueAsFloat(TEXT("StateTime"), StateTime);
 }
 
 

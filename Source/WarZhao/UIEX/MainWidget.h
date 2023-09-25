@@ -46,7 +46,7 @@ private:
 
 	UPROPERTY(Category = "UIOnOff", EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 		ESlateVisibility OptionOnOff = ESlateVisibility::Hidden;
-
+		
 		class UInventoryUserWidget* Inven;
 
 		UPROPERTY()

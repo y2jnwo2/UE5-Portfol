@@ -87,6 +87,13 @@ public:
 	{
 		MgrComponent.Add(_Component);
 	}
+
+	/*UFUNCTION()
+	float HPRefresh()
+	{
+		return HP / MAXHP;
+	}*/
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Pawn", meta = (AllowPrivateAccess = "true"))
 		float BaseTurnRate;
