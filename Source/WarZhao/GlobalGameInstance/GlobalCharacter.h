@@ -155,7 +155,7 @@ private:
 	class UGlobalAnimInstance* GlobalAnimInstance = nullptr;
 
 	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BluePrintReadWrite, meta = (AllowPrivateAccess = true))
-	float HP = 1;
+	float HP = 10;
 
 	UPROPERTY(Category = "GlobalCharacterValue", EditAnywhere, BluePrintReadWrite, meta = (AllowPrivateAccess = true))
 	float MAXHP = 10;

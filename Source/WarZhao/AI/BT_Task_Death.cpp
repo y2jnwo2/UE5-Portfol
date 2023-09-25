@@ -26,5 +26,6 @@ void UBT_Task_Death::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemo
 	if (Time <= GetStateTime(OwnerComp))
 	{
 		GetGlobalCharacter(OwnerComp)->Destroy();
+
 	}
 }

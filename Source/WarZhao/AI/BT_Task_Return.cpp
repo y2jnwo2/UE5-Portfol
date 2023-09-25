@@ -25,6 +25,11 @@ void UBT_Task_Return::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMem
 		return;
 	}
 
+	if (true == IsHPCheck(OwnerComp) && bHit)
+	{
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return;
+	}
 
 	FVector OriginPos = GetBlackboardComponent(OwnerComp)->GetValueAsVector(TEXT("OriginPos"));
 

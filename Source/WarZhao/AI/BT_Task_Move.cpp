@@ -46,6 +46,11 @@ void UBT_Task_Move::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemor
 		return;
 	}
 
+	if (true == IsHPCheck(OwnerComp) && bHit)
+	{
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return;
+	}
 
 	{
 		FVector TargetPos = TargetActor->GetActorLocation();

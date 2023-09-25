@@ -31,6 +31,12 @@ void UBT_Task_Attack::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMem
 		return;
 	}
 
+	if (true == IsHPCheck(OwnerComp) && bHit)
+	{
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return;
+	}
+
 	UAnimMontage* Montage = GetGlobalCharacter(OwnerComp)->GetAnimMontage(UBT_Task_AIBase::GetAiState(OwnerComp));
 	float Time = Montage->CalculateSequenceLength();
 

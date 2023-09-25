@@ -14,6 +14,7 @@ enum class AIState : uint8
 	PATROL UMETA(DisplayName = "순찰"),
 	ATTACK UMETA(DisplayName = "공격"),
 	DEATH UMETA(DisplayName = "죽음"),
+	DAMAGED UMETA(DisplayName = "피해"),
 };
 
 UENUM(BlueprintType)

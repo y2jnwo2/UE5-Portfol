@@ -69,6 +69,12 @@ void UBT_Task_Patrol::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMem
 		return;
 	}
 
+	/*if (true == IsHPCheck(OwnerComp))
+	{
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return;
+	}*/
+
 	UObject* PPObject = GetBlackboardComponent(OwnerComp)->GetValueAsObject(TEXT("PatrolPositions"));
 
 	if (nullptr == PPObject)

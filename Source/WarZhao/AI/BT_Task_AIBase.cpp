@@ -3,11 +3,13 @@
 
 #include "BT_Task_AIBase.h"
 #include "Kismet/GameplayStatics.h"
+#include <GlobalGameInstance/GlobalEnums.h>
 
 UBT_Task_AIBase::UBT_Task_AIBase()
 {
 	bNotifyTick = true;
 	bNotifyTaskFinished = true;
+
 }
 
 void UBT_Task_AIBase::OnGameplayTaskActivated(class UGameplayTask&)
@@ -133,6 +135,8 @@ void UBT_Task_AIBase::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMem
 	float StateTime = BlackBoard->GetValueAsFloat(TEXT("StateTime"));
 	StateTime += DelataSeconds;
 	BlackBoard->SetValueAsFloat(TEXT("StateTime"), StateTime);
+
+
 }
 
 
@@ -183,5 +187,16 @@ bool UBT_Task_AIBase::IsDeathCheck(UBehaviorTreeComponent& OwnerComp)
 		return true;
 	}
 
+	return false;
+}
+
+bool UBT_Task_AIBase::IsHPCheck(UBehaviorTreeComponent& OwnerComp)
+{
+	if (GetGlobalCharacter(OwnerComp)->GetHP() < HPRef)
+	{
+		HPRef -= 3.f;
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return true;
+	}
 	return false;
 }

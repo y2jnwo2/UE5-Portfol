@@ -22,11 +22,19 @@ EBTNodeResult::Type UBT_Task_Idle::ExecuteTask(UBehaviorTreeComponent& OwnerComp
 
 void UBT_Task_Idle::TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DelataSeconds)
 {
+	bHit = false;
+
 	if (true == IsDeathCheck(OwnerComp))
 	{
 		SetStateChange(OwnerComp, AIState::DEATH);
 		return;
 	}
+
+	/*if (true == IsHPCheck(OwnerComp))
+	{
+		SetStateChange(OwnerComp, AIState::DAMAGED);
+		return;
+	}*/
 
 	Super::TickTask(OwnerComp, NodeMemory, DelataSeconds);
 

@@ -45,4 +45,11 @@ public:
 	void TickTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory, float DeltaSeconds) override;
 
 	bool IsDeathCheck(UBehaviorTreeComponent& OwnerComp);
+
+	bool IsHPCheck(UBehaviorTreeComponent& OwnerComp);
+
+	// TODO
+	float HPRef = 10.f;
+
+	bool bHit = false;;
 };

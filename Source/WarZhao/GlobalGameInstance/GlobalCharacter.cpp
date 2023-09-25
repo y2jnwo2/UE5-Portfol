@@ -82,7 +82,7 @@ void AGlobalCharacter::OverLap(UPrimitiveComponent* OverlappedComponent,
 
 		}
 
-		HP -= 1;
+		HP -= 3;
 	}
 	// HPRefresh();
 }
